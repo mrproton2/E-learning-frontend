@@ -1,0 +1,120 @@
+
+
+<form [formGroup]="studentmyclassesForm" >
+	<h1>Subjects</h1>
+	<mat-card class="card-class">
+		<mat-card-header>
+			<mat-card-title>Physics</mat-card-title>
+			<mat-card-subtitle></mat-card-subtitle>
+		</mat-card-header>
+		<!-- <img mat-card-sm-image src="https://angular.io/assets/images/logos/angular/angular.svg"/> -->
+		<mat-card-content>
+			<div>
+				<button routerLink="studentvideolecturepanel" style="margin-top: 2px;" mat-raised-button color="primary" matBadge="7" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">Lecture</button>
+			</div>
+			<div>	
+				<button style="margin-top: 25px; " mat-raised-button color="primary" matBadge="1" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">PDF Notes</button>
+			</div>
+			<div>
+				<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="12" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">DPP</button>
+			</div>
+			<div>
+				<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="10" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">assignment</button>
+			</div>
+		</mat-card-content>
+		<!-- <mat-card-actions>
+			<button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
+			<button mat-button><mat-icon>share</mat-icon> Share</button>
+		</mat-card-actions> -->
+		<mat-card-footer></mat-card-footer>
+	</mat-card>
+	
+	<mat-card class="card-class">
+		<mat-card-header>
+			<mat-card-title>Math</mat-card-title>
+			<mat-card-subtitle></mat-card-subtitle>
+		</mat-card-header>
+		<!-- <img mat-card-sm-image src="https://angular.io/assets/images/logos/angular/angular.svg"/> -->
+		<mat-card-content>
+			<div>
+		<button style="margin-top: 2px;" mat-raised-button color="primary" matBadge="7" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">Lecture</button>
+	</div>
+	<div>
+		<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="1" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">PDF Notes</button>
+	</div>
+	<div>
+		<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="12" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">DPP</button>
+	</div>
+	<div>
+		<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="10" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">assignment</button>
+	</div>
+		</mat-card-content>
+		<!-- <mat-card-actions>
+			<button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
+			<button mat-button><mat-icon>share</mat-icon> Share</button>
+		</mat-card-actions> -->
+		<mat-card-footer></mat-card-footer>
+	</mat-card>
+	
+	<mat-card class="card-class">
+		<mat-card-header>
+			<mat-card-title>Biology</mat-card-title>
+			<mat-card-subtitle></mat-card-subtitle>
+		</mat-card-header>
+		<!-- <img mat-card-sm-image src="https://angular.io/assets/images/logos/angular/angular.svg"/> -->
+		<mat-card-content>
+			<div>
+				<button style="margin-top: 2px;" mat-raised-button color="primary" matBadge="7" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">Lecture</button>
+			</div>
+			<div>
+				<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="1" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">PDF Notes</button>
+			</div>
+			<div>
+				<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="12" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">DPP</button>
+			</div>
+			<div>
+				<button style="margin-top: 25px;" mat-raised-button color="primary" matBadge="10" [matBadgeHidden]="hidden" matBadgeColor="accent" (click)="toggleBadgeVisibility()">assignment</button>
+			</div>
+			
+		</mat-card-content>
+		<!-- <mat-card-actions>
+			<button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
+			<button mat-button><mat-icon>share</mat-icon> Share</button>
+		</mat-card-actions> -->
+		<mat-card-footer></mat-card-footer>
+		
+	</mat-card>
+	
+	</form>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ngx-extended-pdf-viewer
+	[src]="'E:/gnkhalsa project/New folder/E-learning/src/assets/example.pdf'"
+	[useBrowserLocale]="true"
+	height="100%"
+	weidth="800px"
+	[textLayer]="true"
+	[showHandToolButton]="true"
+	[(page)]="page"
+	[showDownloadButton]="true">
+</ngx-extended-pdf-viewer> -->

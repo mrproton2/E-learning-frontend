@@ -1,0 +1,28 @@
+<form [formGroup]="addStreamGrp"  (ngSubmit)="checkActionType()" >
+    <h1 mat-dialog-title>{{data.title}}</h1>
+    <div mat-dialog-content>
+      
+      <input hidden="true" formControlName="type" id="type" value={{data.type}} matInput>
+    
+       <mat-form-field>
+        <mat-label>Stream name</mat-label>
+        <input formControlName="stream_name" id="stream_name"  matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Date of creation</mat-label>
+        <input matInput formControlName="creation_date" id="creation_date"   value={{data.creation_date}} [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+       </mat-form-field>
+       
+       <div>
+        <mat-checkbox formControlName="status" id="status" >Is Active</mat-checkbox>
+       </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button  id="btnsave"  type="submit" color="primary">{{data.type}}</button>
+      <a (click)="closepopup()" mat-raised-button   color="warn">Close</a>
+
+      <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+    </form>

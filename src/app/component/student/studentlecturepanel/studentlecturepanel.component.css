@@ -1,0 +1,32 @@
+.outer-container {
+    display: flex;
+  }
+  
+  .inner-div {
+    height: fit-content;
+  }
+  
+  .left {
+    background-color: lightblue;
+    width: 80%;
+  }
+  
+  .right {
+    background-color: lightgreen;
+    width: 20%;
+  }
+  .card-class{
+    margin:5%;
+    width: 90%;
+    height: 50px;
+    text-align: left;
+    float: left;
+}
+.card-content {
+    /* Set padding to create some space between the card edges and content */
+    padding: 1%;
+    /* Set maximum height for the content area */
+  
+    /* Allow content to scroll within the max-height limit */
+    overflow: auto;
+  }

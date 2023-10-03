@@ -1,0 +1,49 @@
+<div class="container">
+  <h1> Add Subject </h1>
+
+  <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Select Substream</mat-label>
+      <mat-select disableRipple formControlName="name">
+        <mat-option value="1">Jee</mat-option>
+        <mat-option value="2">NEET</mat-option>
+        <mat-option value="3">MBA</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+
+    <table class="table table-bordered" formArrayName="subjects">
+      <tr>
+        <th colspan="2">Add Multiple Subject:</th>
+        <th width="150px">
+          <button mat-raised-button color="accent" type="button" (click)="addsubject()">Add Subject</button>
+          <!-- <button mat-raised-button >Add Subject</button> -->
+        </th>
+      </tr>
+      <tr *ngFor="let subject of subjects.controls; let i=index" [formGroupName]="i">
+        <td>
+          <mat-form-field>
+            <mat-label>Subject Name:</mat-label>
+            <input matInput type="text" formControlName="sub">
+          </mat-form-field>
+        </td>
+        <!-- <td>
+          <mat-form-field>
+            <mat-label>Price:</mat-label>
+            <input matInput type="text" formControlName="price">
+          </mat-form-field>
+        </td> -->
+        <td>
+          <button mat-icon-button (click)="removesubject(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <!-- <button mat-raised-button  class="btn btn-success">Submit</button> -->
+    <button mat-raised-button color="primary" type="submit" >Submit</button>
+  </form>
+
+
+</div>

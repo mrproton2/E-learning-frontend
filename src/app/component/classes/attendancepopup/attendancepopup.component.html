@@ -1,0 +1,84 @@
+<form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+    <div>
+     <h3>Details</h3>
+    <mat-form-field>
+        <mat-label>Batch Name</mat-label>
+        <input matInput formControlName="batchname" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="date" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Alloted Faculty</mat-label>
+        <input matInput formControlName="allotfaculty" required>
+      </mat-form-field>
+    
+     
+    
+      <mat-form-field>
+        <mat-label>Timing</mat-label>
+        <input matInput formControlName="timing" required email>
+      
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <input matInput formControlName="subject" required email>
+      
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Test-Topic</mat-label>
+        <input matInput formControlName="testtopic" required email>
+      
+      </mat-form-field>
+  
+  
+    </div>
+    <h2>Attendance Sheet</h2>
+    <div>
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Select All Checkbox -->
+            
+            <!-- Other Columns -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+            </ng-container>
+           
+          
+            <!-- Displayed Columns -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            <ng-container matColumnDef="selectlecture">
+                
+                <mat-header-cell *matHeaderCellDef>Lecture </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <mat-checkbox [(ngModel)]="row.selected" (change)="selectRow(row)"></mat-checkbox>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="selecttest">
+                
+                <mat-header-cell *matHeaderCellDef> Test </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <mat-checkbox [(ngModel)]="row.selected" (change)="selectRow(row)"></mat-checkbox>
+                </mat-cell>
+              </ng-container>
+            
+
+
+          </mat-table>
+          <button mat-raised-button color="primary" type="submit" >Submit</button>
+    </div>
+</form>

@@ -1,0 +1,84 @@
+
+<form [formGroup]="studentlectureForm">
+
+<mat-card >
+	<mat-card-content>
+		<div style="height:fit-content; width: fit-content;">
+			<h3> Video Player</h3>
+			<vg-player> 
+				<vg-overlay-play></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+    <vg-scrub-bar>
+      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+			<vg-controls> 
+	<vg-play-pause></vg-play-pause>
+      <vg-playback-button></vg-playback-button>
+      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+      <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+      <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+      <vg-track-selector></vg-track-selector>
+      <vg-mute></vg-mute>
+      <vg-volume></vg-volume>
+      <vg-fullscreen></vg-fullscreen>
+			  </vg-controls> 
+			  <video [vgMedia]="$any(media)" #media [src]="activeVideo.src" id="singleVideo" preload="auto" crossorigin>
+			  </video>
+			</vg-player>
+			<ul>
+				<li class="playlist-item" *ngFor="let video of playlist; let $index = index"
+				(click)="onClickPlaylistVideo(video, $index)" [class.selected]="video === activeVideo">
+				{{ video.title }}
+				</li>
+			  </ul>
+		  </div>
+<div>
+  <mat-card class="card-class"   *ngFor='let video of videolist;'>
+		<mat-card-header>
+			<mat-card-title>{{video.title}}</mat-card-title>
+		</mat-card-header>
+		
+		<mat-card-content>
+			<a href="http://localhost:4200/studentdefault/studentlecturepanel?title=firstvideo">
+
+			<div style="height:fit-content; width: fit-content;">
+				<h3> Video Player</h3>
+				<vg-player> 
+					<vg-overlay-play></vg-overlay-play>
+		<vg-buffering></vg-buffering>
+		<vg-scrub-bar>
+		  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+		  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+		</vg-scrub-bar>
+				<vg-controls> 
+		<vg-play-pause></vg-play-pause>
+		  <vg-playback-button></vg-playback-button>
+		  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+		  <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+		  <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+		  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+		  <vg-track-selector></vg-track-selector>
+		  <vg-mute></vg-mute>
+		  <vg-volume></vg-volume>
+		  <vg-fullscreen></vg-fullscreen>
+				  </vg-controls>
+				  <!-- <a href="https://www.w3schools.com">abc</a> 	 -->
+				  <video   [vgMedia]="$any(media)" #media [src]=video.src id="singleVideo" preload="auto" crossorigin> 
+				  </video>
+				
+				</vg-player>				
+			  </div>
+			  </a>
+		</mat-card-content>
+		
+		<mat-card-footer>
+
+		</mat-card-footer>
+	</mat-card>
+	
+</div>
+</mat-card-content>
+</mat-card>
+</form>

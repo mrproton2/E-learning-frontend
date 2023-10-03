@@ -1,0 +1,37 @@
+<form [formGroup]="addsubstreamForm"  (ngSubmit)="addsubstream()" >
+  <h1 mat-dialog-title>Add sub stream</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Select Stream:</mat-label>
+      <mat-select>
+        <mat-option value="science">Science</mat-option>
+        <mat-option value="commerce">Commerce</mat-option>
+        <mat-option value="arts">Arts</mat-option>
+        <mat-option value="mba">MBA</mat-option>
+      </mat-select>
+    </mat-form-field>
+     <mat-form-field>
+      <mat-label>Sub Stream name</mat-label>
+      <input formControlName="addsubstream" matInput>
+     </mat-form-field>
+     <mat-form-field>
+      <mat-label>Fees</mat-label>
+      <input formControlName="fees" matInput>
+     </mat-form-field>
+     <mat-form-field>
+      <mat-label>Date of creation</mat-label>
+      <input matInput formControlName="doc"[matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+     </mat-form-field>
+     
+     <div>
+      <mat-checkbox formControlName="status">Is Active</mat-checkbox>
+     </div>
+  </div>
+  <div mat-dialog-actions>
+      <button mat-raised-button type="submit" color="primary">Save</button>
+    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+  </div>
+  </form>

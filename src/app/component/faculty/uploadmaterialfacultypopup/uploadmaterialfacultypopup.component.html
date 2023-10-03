@@ -1,0 +1,93 @@
+<div class="container">
+    <h1> Add Material </h1>
+  
+    <form [formGroup]="uploadmaterialForm">
+      <mat-form-field>
+        <mat-label>Select Substream</mat-label>
+        <mat-select disableRipple formControlName="name">
+          <mat-option value="1">Jee</mat-option>
+          <mat-option value="2">NEET</mat-option>
+          <mat-option value="3">MBA</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label>Batch</mat-label>
+        <mat-select disableRipple formControlName="batch">
+          <mat-option value="1">Jee</mat-option>
+          <mat-option value="2">NEET</mat-option>
+          <mat-option value="3">MBA</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <mat-select disableRipple formControlName="subject">
+          <mat-option value="1">Jee</mat-option>
+          <mat-option value="2">NEET</mat-option>
+          <mat-option value="3">MBA</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Content Type</mat-label>
+        <mat-select disableRipple formControlName="contenttype">
+          <mat-option value="1">Lecture</mat-option>
+          <mat-option value="2">DPP</mat-option>
+          <mat-option value="3">Assginment</mat-option>
+          <mat-option value="3">Test Paper</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      
+  
+      <table class="table table-bordered" formArrayName="subjects">
+        <tr>
+          <th colspan="2">Add Material:</th>
+          <th width="150px">
+            <button mat-raised-button color="accent" type="button" (click)="addmaterial()">Add Material</button>
+            <!-- <button mat-raised-button >Add Subject</button> -->
+          </th>
+        </tr>
+        <tr *ngFor="let subject of subjects.controls; let i=index" [formGroupName]="i">
+          <td>
+            <mat-form-field>
+              <mat-label>Content Title:</mat-label>
+              <input matInput type="text" formControlName="title">
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+                <mat-label>Upload Date</mat-label>
+                <input matInput formControlName="uploaddate"[matDatepicker]="picker" [(ngModel)]="selectedDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+               </mat-form-field>
+          </td> 
+          <td>
+            <mat-form-field>
+              <mat-label>Upload By</mat-label>
+              <input matInput type="text" formControlName="uploadby">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Select file</mat-label>
+              <input matInput type="text" formControlName="selectfile">
+            </mat-form-field>
+          </td>
+          
+          <td>
+            <button mat-icon-button (click)="removesubject(i)">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+  
+      <!-- <button mat-raised-button  class="btn btn-success">Submit</button> -->
+      <button mat-raised-button color="primary"  (ngSubmit)="upload()"type="submit" >Upload</button>
+    </form>
+  
+  
+  </div>
+  

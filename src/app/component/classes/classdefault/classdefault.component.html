@@ -1,0 +1,86 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    
+    <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span> Class Panel</span>
+    <span class="example-spacer"></span>
+    <button mat-flat-button color="warn" routerLink="classprofile">Profile</button>
+        
+    
+</mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+        <mat-list-item>
+            <button routerLink="classdashboard" mat-button><mat-icon></mat-icon> Dashboard</button>
+        </mat-list-item>
+         
+        <mat-list-item>
+            <button routerLink="addstream" mat-button><mat-icon></mat-icon> Add stream</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="addsubstream" mat-button><mat-icon></mat-icon>Add Substream</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="addsubject" mat-button><mat-icon></mat-icon>Add Subject</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="addbatch" mat-button><mat-icon></mat-icon>Add Batch</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="attendance" mat-button><mat-icon></mat-icon>Attendance Management</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="inquiryform" mat-button><mat-icon></mat-icon>Inquiry Form</button>
+        </mat-list-item>
+       
+        <mat-list-item>
+            <button routerLink="admissionform" mat-button><mat-icon></mat-icon>Admission Form</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="generateidpassword" mat-button><mat-icon></mat-icon>Generate ID-Password</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="invoicereport" mat-button><mat-icon></mat-icon>Invoice Report</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="schedule" mat-button><mat-icon></mat-icon>Schedule</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="addfacultyetc" mat-button><mat-icon></mat-icon>Add Faculty/Staff/Peon</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="salary" mat-button><mat-icon></mat-icon>Salary</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="uploadmaterial" mat-button><mat-icon></mat-icon>Upload Material</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="uploadmarks" mat-button><mat-icon></mat-icon>Upload Marks</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="feespayment" mat-button><mat-icon></mat-icon>Fees Payment</button>
+        </mat-list-item>
+       
+        <!-- <mat-list-item>
+            <button mat-button><mat-icon>settings</mat-icon> Settings</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button><mat-icon>help</mat-icon> Help</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button><mat-icon>analytics</mat-icon> analytics</button>
+        </mat-list-item> -->
+    </mat-nav-list>
+    </mat-drawer>
+    
+    <mat-drawer-content>
+        <div style="height: 600px;">
+           
+           
+            <router-outlet></router-outlet>
+            </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+

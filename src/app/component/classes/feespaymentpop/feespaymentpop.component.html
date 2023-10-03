@@ -1,0 +1,142 @@
+<form [formGroup]="fesspaymentForm" (ngSubmit)="onSubmit()">
+    <h3>Student Details</h3>
+    <div>
+
+        <mat-form-field>
+            <mat-label>Select Substream</mat-label>
+            <mat-select disableRipple formControlName="substreamName">
+              <mat-option value="1">Jee</mat-option>
+              <mat-option value="2">NEET</mat-option>
+              <mat-option value="3">MBA</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-label>Batch Name</mat-label>
+            <mat-select disableRipple formControlName="batchName">
+              <mat-option value="1">Jee batch1</mat-option>
+              <mat-option value="2">jee batch2</mat-option>
+              <mat-option value="3">jee batch3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <mat-select disableRipple formControlName="name">
+              <mat-option value="1">abhishek</mat-option>
+              <mat-option value="2">abhishek2</mat-option>
+              <mat-option value="3">abhishek3</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div>
+
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+    
+
+      <mat-form-field>
+        <mat-label>Contact No.</mat-label>
+        <input matInput formControlName="contactNo" required pattern="[0-9]*">
+        <mat-hint align="end" >Only digits allowed</mat-hint>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Email ID</mat-label>
+        <input matInput formControlName="email" required email>
+        <mat-error *ngIf="fesspaymentForm.get('email')?.invalid">Invalid email format</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender" required>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="others">Others</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+  <div>
+    <!-- Fees Structure -->
+    <h3>Fees Structure</h3>
+    <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount" required pattern="[0-9]*">
+        <mat-hint align="end">Only digits allowed</mat-hint>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Discount (%)</mat-label>
+        <input matInput formControlName="discount" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>GST</mat-label>
+        <input matInput formControlName="gst" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Paid Amount</mat-label>
+        <input matInput formControlName="paidAmount" required pattern="[0-9]*">
+        <mat-hint align="end">Only digits allowed</mat-hint>
+      </mat-form-field>
+    <!-- Add other fees structure fields here -->
+</div>
+<!-- Payment -->
+<mat-checkbox formControlName="installmentMode">Installment Mode</mat-checkbox>
+
+<div *ngIf="fesspaymentForm.get('fullPayment')?.value || fesspaymentForm.get('installmentMode')?.value">
+  <mat-checkbox formControlName="onlineMode">Online Mode</mat-checkbox>
+  <mat-checkbox formControlName="offlineMode">Offline Mode</mat-checkbox>
+  <div *ngIf="fesspaymentForm.get('installmentMode')?.value">
+    <mat-select formControlName="numberOfInstallments">
+      <mat-option value="1">1 Installment</mat-option>
+      <mat-option value="2">2 Installments</mat-option>
+      <mat-option value="3">3 Installments</mat-option>
+    </mat-select>
+  
+    <div *ngIf="fesspaymentForm.get('onlineMode')?.value">
+     
+    </div>
+  
+    <div *ngIf="fesspaymentForm.get('offlineMode')?.value">
+    
+    </div>
+  </div>
+  
+  <div *ngIf="fesspaymentForm.get('onlineMode')?.value">
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="onlineAmount" required pattern="[0-9]*">
+      <mat-hint align="end">Only digits allowed</mat-hint>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="upi">UPI</mat-checkbox>
+    <mat-checkbox formControlName="card">Card</mat-checkbox>
+    <mat-checkbox formControlName="banking">Banking</mat-checkbox>
+  </div>
+
+  <div *ngIf="fesspaymentForm.get('offlineMode')?.value">
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="offlineAmount" required pattern="[0-9]*">
+      <mat-hint align="end">Only digits allowed</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Collected By</mat-label>
+      <input matInput formControlName="offlineCollectedBy" required>
+    </mat-form-field>
+  </div>
+</div>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="fesspaymentForm.invalid">Submit</button>
+  </form>
+  

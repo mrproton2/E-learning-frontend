@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <button (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Faculty Panel</span>
+    <span class="example-spacer"></span>
+    
+    <button routerLink="facultyprofile" mat-raised-button color="accent">Profile</button>
+</mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+        <mat-list-item>
+            <button routerLink="facultydashboard" mat-button><mat-icon></mat-icon> Dashboard</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="raiseddoubt" mat-button><mat-icon></mat-icon>Raised Doubt</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="facultyattendance" mat-button><mat-icon></mat-icon>Attendance Record</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="salarystatus" mat-button><mat-icon></mat-icon>Salary Status</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="uploadmaterial" mat-button><mat-icon></mat-icon>Upload Material</button>
+        </mat-list-item>
+       
+    </mat-nav-list>
+    </mat-drawer>
+    
+    <mat-drawer-content>
+        <div style="text-align: center;min-height: 600px;">
+           
+            <router-outlet></router-outlet>
+           
+            </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+<app-footer></app-footer>

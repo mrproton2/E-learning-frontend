@@ -1,0 +1,85 @@
+<form [formGroup]="uploadmarksForm" (ngSubmit)="onSubmit()">
+    <div>
+     <h3>Details</h3>
+    <mat-form-field>
+        <mat-label>Batch Name</mat-label>
+        <input matInput formControlName="batchname" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Test Date</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="date" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Alloted Faculty</mat-label>
+        <input matInput formControlName="allotfaculty" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Timing</mat-label>
+        <input matInput formControlName="timing" required>
+      
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <input matInput formControlName="subject" required >
+      
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Test-Topic</mat-label>
+        <input matInput formControlName="testtopic" required>
+      
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Total Marks</mat-label>
+        <input matInput formControlName="totalmarks" required>
+      
+      </mat-form-field>
+  
+  
+    </div>
+    <h2>MarkSheet</h2>
+    <div>
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+            </ng-container>
+           
+          
+            <!-- Displayed Columns -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            <ng-container matColumnDef="obtainmarks">
+                
+                <mat-header-cell *matHeaderCellDef>Obtain Marks </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <input matInput formControlName="obtainmarks" required>
+                </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="totalmarks">
+                
+                <mat-header-cell *matHeaderCellDef> Total Marks </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <input matInput formControlName="totalmarks" required>
+                  </mat-cell>
+              </ng-container>
+            
+
+
+          </mat-table>
+          <button mat-raised-button color="primary" type="submit" >Submit</button>
+    </div>
+</form>

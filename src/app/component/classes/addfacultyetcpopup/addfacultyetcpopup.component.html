@@ -1,0 +1,268 @@
+<form [formGroup]="addfcultyetcForm" (ngSubmit)="onSubmit()">
+    <!-- Student Details -->
+    <div>
+    <h3>ADD Faculty/Staff/Peon</h3>
+    <div>
+    <mat-form-field>
+        <mat-label>Type Of Employee</mat-label>
+            <mat-select formControlName="employee" [(ngModel)]="selected" (ngModelChange)="onSelectionChange()">
+          <mat-option value="faculty">Faculty</mat-option>
+          <mat-option value="staff">Staff</mat-option>
+          <mat-option value="peon">Peon</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="selected === 'faculty'">
+    <mat-form-field>
+        <mat-label>Name of Faculty</mat-label>
+        <input matInput formControlName="name" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Contact No.</mat-label>
+        <input matInput formControlName="contactNo" required pattern="[0-9]*">
+        <mat-hint align="end" >Only digits allowed</mat-hint>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Email ID</mat-label>
+        <input matInput formControlName="email" required email>
+        <mat-error *ngIf="addfcultyetcForm.get('email')?.invalid">Invalid email format</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender" required>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="others">Others</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Post</mat-label>
+        <input matInput formControlName="post" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>For Subject</mat-label>
+        <input matInput formControlName="forsubject" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Qualification</mat-label>
+        <input matInput formControlName="qualification" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Experience</mat-label>
+        <input matInput formControlName="experience" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Teaching in others Institute</mat-label>
+        <input matInput formControlName="tioi" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Pan No</mat-label>
+        <input matInput formControlName="panno" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Aadhar No</mat-label>
+        <input matInput formControlName="aadharno" required>
+      </mat-form-field>
+       
+      <mat-form-field>
+        <mat-label>TDS Number</mat-label>
+        <input matInput formControlName="tds" required>
+      </mat-form-field>
+    
+    
+      <mat-form-field>
+        <mat-label>Per Hour amount</mat-label>
+        <input matInput formControlName="pha" required>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label>Account No:</mat-label>
+        <input matInput formControlName="ac" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>IFSC Code</mat-label>
+        <input matInput formControlName="ifsc" required>
+      </mat-form-field>
+      <div> <button   mat-raised-button color="primary" type="button" (click)="addfaculty()">Add Faculty</button>
+      </div>
+    </div>
+    
+     
+
+</div>
+<div *ngIf="selected === 'staff'">
+  <mat-form-field>
+    <mat-label>Name of Staff</mat-label>
+    <input matInput formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="dobPicker" formControlName="dob" required>
+    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dobPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Contact No.</mat-label>
+    <input matInput formControlName="contactNo" required pattern="[0-9]*">
+    <mat-hint align="end" >Only digits allowed</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email ID</mat-label>
+    <input matInput formControlName="email" required email>
+    <mat-error *ngIf="addfcultyetcForm.get('email')?.invalid">Invalid email format</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender" required>
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+      <mat-option value="others">Others</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Qualification</mat-label>
+    <input matInput formControlName="qualification" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Experience</mat-label>
+    <input matInput formControlName="experience" required>
+  </mat-form-field>
+ 
+  <mat-form-field>
+    <mat-label>Pan No</mat-label>
+    <input matInput formControlName="panno" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Aadhar No</mat-label>
+    <input matInput formControlName="aadharno" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Post</mat-label>
+    <input matInput formControlName="post" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Salary</mat-label>
+    <input matInput formControlName="salary" required>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Account No:</mat-label>
+    <input matInput formControlName="ac" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>IFSC Code</mat-label>
+    <input matInput formControlName="ifsc" required>
+  </mat-form-field>
+  <div>
+    <button mat-raised-button color="primary" type="button" (click)="addstaff()">Add Staff</button>
+  </div>
+
+</div>
+<div *ngIf="selected === 'peon'">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="dobPicker" formControlName="dob" required>
+    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dobPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Contact No.</mat-label>
+    <input matInput formControlName="contactNo" required pattern="[0-9]*">
+    <mat-hint align="end" >Only digits allowed</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email ID</mat-label>
+    <input matInput formControlName="email" required email>
+    <mat-error *ngIf="addfcultyetcForm.get('email')?.invalid">Invalid email format</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender" required>
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+      <mat-option value="others">Others</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Qualification</mat-label>
+    <input matInput formControlName="qualification" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Experience</mat-label>
+    <input matInput formControlName="experience" required>
+  </mat-form-field>
+ 
+  <mat-form-field>
+    <mat-label>Pan No</mat-label>
+    <input matInput formControlName="panno" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Aadhar No</mat-label>
+    <input matInput formControlName="aadharno" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Post</mat-label>
+    <input matInput formControlName="post" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Salary</mat-label>
+    <input matInput formControlName="salary" required>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Account No:</mat-label>
+    <input matInput formControlName="ac" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>IFSC Code</mat-label>
+    <input matInput formControlName="ifsc" required>
+  </mat-form-field>
+  <div>
+    <button mat-raised-button color="primary" type="button" (click)="addpeon()">Add Peon</button>
+  </div>
+
+</div>
+</form>
