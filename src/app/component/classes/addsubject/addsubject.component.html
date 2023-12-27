@@ -3,13 +3,10 @@
   <mat-form-field>
     <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />
   </mat-form-field>
-  <button style="margin-left: 60%;" (click)="addcustomer()" mat-raised-button color="primary">Add Subjects(+)</button>
+  <button style="margin-left: 60%;" (click)="addsubject('Add Subject','Create')" mat-raised-button color="primary">Add Subject</button>
 
     </mat-card-header>
     <mat-card-content>
-
-    
-
       <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="srno">

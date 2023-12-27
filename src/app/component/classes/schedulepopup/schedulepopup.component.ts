@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-schedulepopup',
@@ -11,8 +11,10 @@ export class SchedulepopupComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.scheduleForm = this.formBuilder.group({
-      name: '',
-      batch:'',
+      name: ['', Validators.required],
+      batch: ['', Validators.required],
+      starttime: ['', Validators.required],
+      endtime: ['', Validators.required],
       subjects: this.formBuilder.array([])
       
     });
@@ -28,6 +30,8 @@ export class SchedulepopupComponent {
       date:'',
       notice:'',
       type:'',
+      strattime:'',
+      endtime:''
       
     });
     this.subjects.push(schudelueGroup);

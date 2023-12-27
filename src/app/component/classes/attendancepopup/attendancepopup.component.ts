@@ -1,34 +1,27 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-export interface Student {
-  id: number;
+export interface PeriodicElement {
   name: string;
-  selected: boolean;
+  position: number;
+  lecture: number;
+  test: string;
 }
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', lecture: 1.0079, test: 'H'},
+  {position: 2, name: 'Helium', lecture: 4.0026, test: 'He'},
+];
+
 @Component({
   selector: 'app-attendancepopup',
   templateUrl: './attendancepopup.component.html',
   styleUrls: ['./attendancepopup.component.css']
 })
 export class AttendancepopupComponent {
-  attendanceForm!: FormGroup;
-  
-  displayedColumns: string[] = ['id', 'name','selectlecture','selecttest'];
-  dataSource: Student[] = [
-    { id: 1, name: 'Abhi', selected: false },
-    { id: 2, name: 'Sunil', selected: false },
-    { id: 3, name: 'Jaydeep', selected: false },
-    { id: 4, name: 'Ankit', selected: false },
-    { id: 5, name: 'Harsh', selected: false },
-    { id: 6, name: 'Mukesh', selected: false },
-    { id: 7, name: 'Vishal', selected: false },
-    { id: 8, name: 'Nikhil', selected: false },
-    // Add more data here
-  ];
-
-  allSelected = false;
-  
+  attendanceForm: FormGroup;
+  displayedColumns: string[] = ['srno', 'name', 'lecture', 'test'];
+  dataSource= ELEMENT_DATA;
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -38,7 +31,6 @@ export class AttendancepopupComponent {
         batchname: ['', Validators.required],
         date: ['', Validators.required],
         allotfaculty: ['', Validators.required],
-      
         timing: ['', Validators.required],
         subject: ['', Validators.required],
         testtopic: ['', Validators.required],
@@ -47,19 +39,11 @@ export class AttendancepopupComponent {
   
   
   onSubmit() {
-    if (this.attendanceForm.valid) {
-    
+    if (this.attendanceForm.valid) {  
       console.log(this.attendanceForm.value);
     }
   }
 
-  selectAll() {
-    this.allSelected = !this.allSelected;
-    this.dataSource.forEach(student => student.selected = this.allSelected);
-  }
-  selectRow(row: Student) {
-    row.selected = !row.selected;
-    this.allSelected = this.dataSource.every(student => student.selected);
-  }
+ 
 }
 

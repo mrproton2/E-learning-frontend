@@ -3,8 +3,7 @@
     <mat-form-field>
       <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />
     </mat-form-field>
-    <button style="margin-left: 60%;" (click)="addstream('Add Stream','Create')" mat-raised-button color="primary">Add
-      Stream (+)</button>
+    <button style="margin-left: 60%;" (click)="addstream('Add Stream','Create')" mat-raised-button color="primary">AddStream (+)</button>
   </mat-card-header>
   <mat-card-content>
     <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/service/master.service';
 @Component({
   selector: 'app-addstreampop',
@@ -17,6 +18,7 @@ export class AddstreampopComponent implements OnInit {
     private ref: MatDialogRef<AddstreampopComponent>,
     private formbuilder: FormBuilder,
     private service: MasterService,
+    private toastr:ToastrService
   ) {
     this.selectedDate = new Date();
   }
@@ -43,15 +45,12 @@ export class AddstreampopComponent implements OnInit {
     }
   }
 
+
   checkActionType() {
-    console.log(this.addStreamGrp.value)
-    debugger
-    console.log(this.addStreamGrp.value.type)
     if (this.addStreamGrp.value.type == "Update") {
       this.updatestream();
     }
     else if (this.addStreamGrp.value.type == "Create") {
-
       console.log(this.addStreamGrp.value.type)
       this.addstream()
     }
@@ -80,11 +79,11 @@ export class AddstreampopComponent implements OnInit {
     if (this.addStreamGrp.valid) {
       this.service.addstream(this.addStreamGrp.value, "data/addstream").subscribe(result => {
         this.data = result;
-        confirm('Added Stream successfully')
+        this.toastr.success('Stream is Created')
         this.closepopup();
       })
     } else {
-      alert('fail')
+      this.toastr.warning('Please Check Form again!')
     }
 
   }

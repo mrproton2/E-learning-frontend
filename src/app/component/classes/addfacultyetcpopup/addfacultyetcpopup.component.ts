@@ -7,12 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./addfacultyetcpopup.component.css']
 })
 export class AddfacultyetcpopupComponent implements OnInit {
-  addfcultyetcForm!: FormGroup;
+  addfcultyetcForm: FormGroup;
     showOTPVerification: boolean = false;
     selected: string = '';
-    
-
-  
     constructor(private formBuilder: FormBuilder) {
       
      

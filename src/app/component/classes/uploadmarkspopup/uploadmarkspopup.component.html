@@ -1,11 +1,21 @@
 <form [formGroup]="uploadmarksForm" (ngSubmit)="onSubmit()">
     <div>
      <h3>Details</h3>
+     <mat-form-field>
+      <mat-label>Select Substream</mat-label>
+      <mat-select  class="from-control" formControlName="substreamname" >
+        <mat-option value="art">Art</mat-option>
+        <mat-option value="science:">Science</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field>
-        <mat-label>Batch Name</mat-label>
-        <input matInput formControlName="batchname" required>
-      </mat-form-field>
-    
+      <mat-label>Select Batch</mat-label>
+      <mat-select class="from-control" formControlName="batchname" >
+        <mat-option value="art">Art</mat-option>
+        <mat-option value="science:">Science</mat-option>
+      </mat-select>
+    </mat-form-field>
       <mat-form-field>
         <mat-label>Test Date</mat-label>
         <input matInput [matDatepicker]="dobPicker" formControlName="date" required>

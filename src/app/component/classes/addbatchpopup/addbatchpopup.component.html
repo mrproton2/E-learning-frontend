@@ -1,18 +1,16 @@
-<form [formGroup]="addbatchForm" >
+<form [formGroup]="addbatchForm" (ngSubmit)="checkActionType()" >
   <h1 mat-dialog-title>Add Batch</h1>
   <div mat-dialog-content>
+    <input hidden="true" formControlName="type" id="type" matInput>
     <mat-form-field>
       <mat-label>Select Sub Stream:</mat-label>
-      <mat-select>
-        <mat-option value="JEE">Science</mat-option>
-        <mat-option value="NEET">Commerce</mat-option>
-        <mat-option value="CET">Arts</mat-option>
-        <mat-option value="xyz">xyz</mat-option>
+      <mat-select formControlName="substream_pk" >
+        <mat-option *ngFor="let degreeTitle of getdatasubstream" [value]="degreeTitle.addsubstream_pk">{{ degreeTitle.sub_stream_name }}</mat-option>
       </mat-select>
     </mat-form-field>
      <mat-form-field>
       <mat-label>Batch Name</mat-label>
-      <input formControlName="batchname" matInput>
+      <input formControlName="batch_name" matInput>
      </mat-form-field>
      <mat-form-field>
       <mat-label>Date of creation</mat-label>

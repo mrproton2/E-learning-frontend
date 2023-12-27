@@ -35,6 +35,7 @@ export class UploadmarkspopupComponent {
 
       // Student Details
       this.uploadmarksForm = this.formBuilder.group({
+        substreamname: ['', Validators.required],
         batchname: ['', Validators.required],
         date: ['', Validators.required],
         allotfaculty: ['', Validators.required],

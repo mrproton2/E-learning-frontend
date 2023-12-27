@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,9 +24,6 @@ import { AddsubstreampopupComponent } from './component/classes/addsubstreampopu
 import { FooterComponent } from './component/footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { Router, RouterModule} from '@angular/router';
-
-
-
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
@@ -110,7 +106,6 @@ import { StudentmyclassesComponent } from './component/student/studentmyclasses/
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FeespaymentComponent } from './component/classes/feespayment/feespayment.component';
 import { FeespaymentpopComponent } from './component/classes/feespaymentpop/feespaymentpop.component';
-
 import { SalarystatusComponent } from './component/faculty/salarystatus/salarystatus.component';
 import { RaiseddoubtComponent } from './component/faculty/raiseddoubt/raiseddoubt.component';
 import { RaiseddoubtpopComponent } from './component/faculty/raiseddoubtpop/raiseddoubtpop.component';
@@ -138,7 +133,7 @@ import {VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { StudentlecturepanelComponent } from './component/student/studentlecturepanel/studentlecturepanel.component'
 import { ToastrModule } from 'ngx-toastr';
 
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -171,7 +166,6 @@ import { ToastrModule } from 'ngx-toastr';
     FacultydashboardComponent,
     ParentsdashboardComponent,
     ParentsdefaultComponent,
-
     AdmissionformComponent,
      InquiryformComponent,
      InquiryformpopupComponent,
@@ -227,7 +221,17 @@ import { ToastrModule } from 'ngx-toastr';
     
     
   ],
-  imports: [MatNativeDateModule,CommonModule,ReactiveFormsModule,MatBottomSheetModule, MatProgressBarModule, MatStepperModule,MatSlideToggleModule , MatSliderModule,MatDialogModule,FormsModule,
+  imports: [
+    MatNativeDateModule,
+    CommonModule,
+    ReactiveFormsModule,
+    MatBottomSheetModule, 
+    MatProgressBarModule, 
+    MatStepperModule,
+    MatSlideToggleModule , 
+    MatSliderModule,
+    MatDialogModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -291,7 +295,11 @@ import { ToastrModule } from 'ngx-toastr';
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    ToastrModule
+    ToastrModule.forRoot({
+      
+    }),
+    MatFormFieldModule,
+    NgxMaterialTimepickerModule
     
 
   ],

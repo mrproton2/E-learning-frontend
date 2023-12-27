@@ -1,22 +1,17 @@
 <div class="container">
   <h1> Add Subject </h1>
-
-  <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="subjectForm" (ngSubmit)="checkActionType()">
     <mat-form-field>
       <mat-label>Select Substream</mat-label>
-      <mat-select disableRipple formControlName="name">
-        <mat-option value="1">Jee</mat-option>
-        <mat-option value="2">NEET</mat-option>
-        <mat-option value="3">MBA</mat-option>
+      <mat-select  formControlName="substream_pk">
+        <mat-option *ngFor="let degreeTitle of dataSource" [value]="degreeTitle.addsubstream_pk">{{ degreeTitle.sub_stream_name}}</mat-option>
       </mat-select>
     </mat-form-field>
-    
-
-    <table class="table table-bordered" formArrayName="subjects">
+    <table class="table table-bordered" formGroupName="subjects">
       <tr>
         <th colspan="2">Add Multiple Subject:</th>
         <th width="150px">
-          <button mat-raised-button color="accent" type="button" (click)="addsubject()">Add Subject</button>
+          <button mat-raised-button color="accent" type="button" (click)="addsubjectarray()">Add Subject</button>
           <!-- <button mat-raised-button >Add Subject</button> -->
         </th>
       </tr>
@@ -24,7 +19,8 @@
         <td>
           <mat-form-field>
             <mat-label>Subject Name:</mat-label>
-            <input matInput type="text" formControlName="sub">
+            <input matInput type="text" formControlName="subjectname">
+            <!-- <input matInput type="text" formControlName="subject.get('subject_name')"> -->
           </mat-form-field>
         </td>
         <!-- <td>

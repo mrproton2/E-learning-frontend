@@ -7,6 +7,7 @@ import { Country, Customer } from '../Model/Customer';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MasterService {
   public baseurl: any = "https://localhost:44390/api/";
 
@@ -19,6 +20,7 @@ export class MasterService {
       { code: 'c2', name: 'Green' },
       { code: 'c3', name: 'Yellow' },
       { code: 'c4', name: 'White' }
+      
     ]
   }
 
@@ -49,6 +51,9 @@ export class MasterService {
     return this.http.put('http://localhost:3000/associate/' + code, data);
   }
 
+
+//AddStream
+
   addstream(data: any, url: any) {
     url = this.baseurl + url;
     return this.http.post(url, data);
@@ -69,4 +74,77 @@ export class MasterService {
     return this.http.put(url, data);
   }
   
+//AddSubstream
+
+addSubStream(data: any, url: any) {
+  debugger
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
+getSubStream(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+deleteSubStream(data: any, url: any){
+  url = this.baseurl + url;
+  console.log(url)
+  return this.http.delete(url+data);
+}
+
+updateSubStream(pk:any,data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.put(url, data);
+}
+
+getStream(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+
+}
+
+
+//InquiryForm
+
+addInquiry(data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
+getInquiryFormData(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+
+
+updateinquiryform(pk:any,data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.put(url, data);
+}
+
+//AddSubject services
+
+addsubject(data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
+getSubject(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+
+// AddBatch servivces
+addbatch(data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
+
+getBatch(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+deletebatch(data: any, url: any){
+  url = this.baseurl + url;
+  console.log(url)
+  return this.http.delete(url+data);
+}
+
 }

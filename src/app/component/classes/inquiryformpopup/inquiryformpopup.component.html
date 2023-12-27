@@ -1,11 +1,9 @@
-<mat-card class="container">
- 
-  <form [formGroup]="inquiryForm" (ngSubmit)="onSubmit()">
-    
-    <mat-card-title>Add Inquiry </mat-card-title>
+  <form [formGroup]="inquiryForm" (ngSubmit)="checkActionType()">
+    <input hidden="true" formControlName="type" id="type"  matInput>
+    <h1 mat-dialog-title>{{data.title}}</h1>
     <mat-card-content>
       <mat-form-field>
-        <input matInput formControlName="name" placeholder="Name" />
+        <input matInput formControlName="name" placeholder="Student Name" />
       </mat-form-field>
 
       <mat-form-field>
@@ -15,47 +13,60 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="address" placeholder="Address" />
+        <input matInput formControlName="address" placeholder="Student Address" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="contact" placeholder="Contact No" />
+        <input matInput formControlName="contact_no" placeholder="Contact No" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="email" placeholder="Email ID" />
+        <input matInput formControlName="email_id" placeholder="Email ID" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Gender</mat-label>
         <mat-select formControlName="gender">
-          <mat-option *ngFor="let gender of genders" [value]="gender">
-            {{ gender }}
-          </mat-option>
+          <mat-option value="science">Science</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="dobPicker" formControlName="dob" placeholder="Date of Birth" />
-        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-        <mat-datepicker #dobPicker></mat-datepicker>
+        <mat-label>Date of creation</mat-label>
+        <input matInput formControlName="date_of_birth"[matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+       </mat-form-field>
+      <div>
+        <h3>Course</h3>
+
+        <mat-form-field >
+          <mat-label>Stream Name</mat-label>
+          <mat-select formControlName="stream_name"  (selectionChange)="onSelect($event.value)">
+            <mat-option *ngFor="let streamdatas of streamdata" [value]="streamdatas.addstream_pk">{{ streamdatas.stream_name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-label>SubStream Name</mat-label>
+          <mat-select formControlName="substream_name">
+            <mat-option *ngFor="let streamdatas of selectedstream" [value]="streamdatas.addsubstream_pk">{{ streamdatas.sub_stream_name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+      </div>
+      <mat-form-field>
+        <input matInput formControlName="previous_qualification" placeholder="Previous Qualification" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="course" placeholder="Course" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput formControlName="qualification" placeholder="Previous Qualification" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput formControlName="schoolName" placeholder="School Name / College Name" />
+        <input matInput formControlName="school_college_name" placeholder="School Name / College Name" />
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
-      <button style="display: flex;justify-content: center; text-align: center;" mat-raised-button color="primary" type="submit">Submit</button>
-    </mat-card-actions>
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" color="primary">{{data.type}}</button>
+    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+  </div>
   </form>
-</mat-card>
-

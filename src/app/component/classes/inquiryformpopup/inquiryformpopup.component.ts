@@ -2,7 +2,14 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MasterService } from 'src/app/service/master.service';
+import { ToastrService } from 'ngx-toastr';
+// export class streamname {
+//   constructor(public addstream_pk: number, public stream_name: string) { }
+// }
 
+// export class substreamname {
+//   constructor(public addsubstream_pk: number, public stream_pk: number, public sub_stream_name: string) { }
+// }
 
 @Component({
   selector: 'app-inquiryformpopup',
@@ -11,61 +18,127 @@ import { MasterService } from 'src/app/service/master.service';
 })
 export class InquiryformpopupComponent implements OnInit {
   inputdata: any;
+  tabledata = this.data;
   editdata: any;
-  inquiryForm!: FormGroup;
+  inquiryForm: FormGroup;
   genders: string[] = ['Male', 'Female', 'Others'];
   closemessage = 'closed using directive'
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<InquiryformpopupComponent>, private buildr: FormBuilder,
-   private service: MasterService, private dialog: MatDialog,private formBuilder: FormBuilder) {
-    this.inquiryForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      date: [null, Validators.required],
-      address: ['', Validators.required],
-      contact: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      email: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
-      dob: [null, Validators.required],
-      course: ['', Validators.required],
-      qualification: ['', Validators.required],
-      schoolName: ['', Validators.required],
-    });
+  streamdata: any[];
+  substreamdata: any[];
+  selectedstream: any;
+
+  
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    private ref: MatDialogRef<InquiryformpopupComponent>,
+    private service: MasterService,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private toastr:ToastrService
+    ) {
+
 
   }
-  
-  ngOnInit(): void {
-    this.inputdata = this.data;
-    if(this.inputdata.code>0){
-      this.setpopupdata(this.inputdata.code)
+
+  ngOnInit() {
+    this.inquiryForm = this.formBuilder.group({
+      addinquiry_pk: [''],
+      type: ['Create', Validators.required],
+      name: ['', Validators.required],
+      date: ['', Validators.required],
+      address: ['', Validators.required],
+      contact_no: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      email_id: ['', Validators.required,],
+      gender: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+      stream_name: [''],
+      substream_name: [''],
+      previous_qualification: ['', Validators.required],
+      school_college_name: ['', Validators.required],
+    });
+
+    this.tabledata = this.data
+    if (this.tabledata.addinquiry_pk > 0) {
+      this.inquiryForm.patchValue({
+        title: this.tabledata.title,
+        type: this.tabledata.type,
+        addinquiry_pk: this.tabledata.addinquiry_pk,
+        name: this.tabledata.studentname,
+        date: this.tabledata.date,
+        address: this.tabledata.address,
+        contact_no: this.tabledata.contact_no,
+        email_id: this.tabledata.email_id,
+        gender: this.tabledata.gender,
+        date_of_birth: this.tabledata.date_of_birth,
+        previous_qualification: this.tabledata.previous_qualification,
+        school_college_name: this.tabledata.school_college_name,
+        stream_name: this.tabledata.stream_name,
+        substream_name: this.tabledata.substream_name,
+
+      })
+    }
+    this.getstreamname();
+    this.getsubstreamname();
+  }
+  checkActionType() {
+    if (this.inquiryForm.value.type == "Update") {
+      this.UpdateInquiryForm();
+    }
+    else if (this.inquiryForm.value.type == "Create") {
+      debugger
+      this.addInquiryForm()
+    }
+    else {
     }
   }
-
-
-  setpopupdata(code: any) {
-    this.service.GetCustomerbycode(code).subscribe(item => {
-      this.editdata = item;
-      this.myform.setValue({name:this.editdata.name,email:this.editdata.email,phone:this.editdata.phone,
-      status:this.editdata.status})
-    });
-  }
-
   closepopup() {
     this.ref.close('Closed using function');
   }
+  addInquiryForm() {
+    if (this.inquiryForm.valid) {
+      this.service.addInquiry(this.inquiryForm.value, "InquiryForm/addInquiryForm").subscribe(result => {
+        this.data = result;
+        this.toastr.success('Successfully Inquiry has been Done!')
+        this.closepopup();
+      })
+    } else {
+      this.toastr.warning('Please Check the Form again')
+    }
 
-  myform = this.buildr.group({
-    name: this.buildr.control(''),
-    email: this.buildr.control(''),
-    phone: this.buildr.control(''),
-    status: this.buildr.control(true)
-  });
+  }
 
-  Saveuser() {
-    this.service.Savecustomer(this.myform.value).subscribe(res => {
-      this.closepopup();
+  UpdateInquiryForm() {
+    console.log(this.inquiryForm.value)
+    console.log(this.inquiryForm.getRawValue().addinquiry_pk)
+    const pk = this.inquiryForm.getRawValue().addinquiry_pk;
+    if (pk != '' && pk != null) {
+      this.service.updateinquiryform(pk, this.inquiryForm.getRawValue(), "InquiryForm/updateinquiryform").subscribe(result => {
+        this.toastr.success('Update has been Successfully !')
+        this.closepopup();
+      })
+    } else {
+      this.toastr.warning('Please Check the Form again')
+    }
+  }
+
+  getstreamname() {
+    this.service.getstream("data/getstream").subscribe(Streamnames => {
+      this.streamdata = Streamnames;
+      console.log(this.streamdata)
     });
   }
-  onSubmit() {
-    if (this.inquiryForm.valid) {
-      console.log(this.inquiryForm.value);
-    }
-}}
+
+  getsubstreamname() {
+    this.service.getSubStream("addSubStream/getsubstream").subscribe(subStreamnames => {
+      this.substreamdata = subStreamnames;
+      console.log(this.substreamdata)
+    });
+  }
+
+  onSelect(s_pk: number) {
+    this.selectedstream = this.substreamdata.filter((item) => item.stream_pk == s_pk);
+    console.log(this.selectedstream)
+
+  }
+}
+

@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {substream } from 'src/app/Model/Customer';
+import { substream } from 'src/app/Model/Customer';
 import { MasterService } from 'src/app/service/master.service';
 import { AddstreampopComponent } from '../addstreampop/addstreampop.component';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-addstream',
   templateUrl: './addstream.component.html',
@@ -17,8 +18,11 @@ export class AddstreamComponent implements OnInit {
   @ViewChild(MatPaginator) paginatior: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private service: MasterService, private dialog: MatDialog) 
-  {
+  constructor(
+    private service: MasterService, 
+    private dialog: MatDialog,
+    private toastr:ToastrService
+    ) {
 
 
   }
@@ -68,10 +72,8 @@ export class AddstreamComponent implements OnInit {
 
   deletestream(element: any) {
     if (confirm('Are you sure??')) {
-      debugger
       this.service.deleteStream(element.addstream_pk, "data/").subscribe(data => {
-        console.log(element.addstream_pk)
-        alert(data.toString());
+        this.toastr.success('Deleted Successfully')
         this.showstream();
       })
     }

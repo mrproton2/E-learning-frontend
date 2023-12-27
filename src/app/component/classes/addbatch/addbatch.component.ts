@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,OnInit,ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,6 +11,13 @@ import { UserdetailComponent } from 'src/app/component/userdetail/userdetail.com
 import { AddstreampopComponent } from '../addstreampop/addstreampop.component';
 import { AddbatchpopupComponent } from '../addbatchpopup/addbatchpopup.component';
 
+export interface batchtable {
+  srno: string;
+  bach_name: string;
+  substreamname: string;
+  DOC: string;
+  status: string;
+}
 
 
 
@@ -19,59 +26,66 @@ import { AddbatchpopupComponent } from '../addbatchpopup/addbatchpopup.component
   templateUrl: './addbatch.component.html',
   styleUrls: ['./addbatch.component.css']
 })
-export class AddbatchComponent {
+export class AddbatchComponent implements OnInit{
   customerlist !: Customer[];
-  dataSource: any;
-  displayedColumns: string[] = ["srno",'bachname', "substreamname", "DOC", "status"];
+  dataSource: any=[];
+  displayedColumns: string[] = ["srno", "batch_name", "creation_date", "status", "action"];
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
-  @ViewChild(MatSort) sort !: MatSort;
+  @ViewChild(MatSort) sort : MatSort;
 
   constructor(private service: MasterService, private dialog: MatDialog) {
-    this.loadcustomer();
+  
+  }
+  ngOnInit(): void {
+  this.GetBatch();
   }
 
-  loadcustomer() {
-    this.service.GetCustomer().subscribe(res => {
-      this.customerlist = res;
-      this.dataSource = new MatTableDataSource<Customer>(this.customerlist);
-      this.dataSource.paginator = this.paginatior;
-      this.dataSource.sort = this.sort;
-    });
-  }
 
   Filterchange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value;
   }
 
-  editcustomer(code: any) {
-    this.Openpopup(code, 'Edit Customer',AddbatchpopupComponent);
+
+  addbatch(title: any, type: any){
+    this.Openpopup(0, title,type, AddbatchpopupComponent);
   }
 
-  detailcustomer(code: any) {
-    this.Openpopup(code, 'Customer Detail',UserdetailComponent);
-  }
-
-  
-
-  addcustomer(){
-    this.Openpopup(0, 'Add Stream',AddbatchpopupComponent);
-  }
-
-  Openpopup(code: any, title: any,component:any) {
+  Openpopup(data: any, title: any,type:any, component: any) {
     var _popup = this.dialog.open(component, {
       width: '30%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data: {
         title: title,
-        code: code
       }
     });
     _popup.afterClosed().subscribe(item => {
-      // console.log(item)
-      this.loadcustomer();
     })
   }
+
+  GetBatch() {
+    this.service.getBatch("Batch/BatchData").subscribe(batchname => {
+      this.dataSource = batchname;
+      console.log(this.dataSource)
+      this.dataSource = new MatTableDataSource<batchtable>(this.dataSource);
+      this.dataSource.paginator = this.paginatior;
+      this.dataSource.sort = this.sort;
+      
+    });
+  }
+
+  deletestream(element: any) {
+    if (confirm('Are you sure??')) {
+      this.service.deletebatch(element.addbatch_pk, "Batch/").subscribe(data => {
+        console.log(element.addbatch_pk)
+        alert(data.toString());
+        this.GetBatch();
+      })
+    }
+
+
+  }
+  editstream(data: any, title: any, type: any) {}
 
 }

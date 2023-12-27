@@ -18,7 +18,9 @@ baseApiUrl:any="https://localhost:44390/api/";
     private router:Router,
     private headers:HttpHeaders,
    
-   ) { }
+   ) { 
+    
+   }
     
                                   
 PostData(inputParam:any,url:string):Observable<any> {

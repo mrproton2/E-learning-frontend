@@ -10,23 +10,81 @@ import { MasterService } from 'src/app/service/master.service';
   styleUrls: ['./addbatchpopup.component.css']
 })
 export class AddbatchpopupComponent  implements OnInit {
-  addbatchForm!: FormGroup;
+  addbatchForm: FormGroup;
+  getdatasubstream:any;
  
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ref: MatDialogRef<AddbatchpopupComponent>,
+    private formBuilder: FormBuilder,
+    private service: MasterService, ) {
+
+    }
 
   ngOnInit() {
 
       // Student Details
       this.addbatchForm = this.formBuilder.group({
-        batchname: ['', Validators.required],
+        type: ['Create', Validators.required],
+        substream_pk: ['', Validators.required],
+        batch_name: ['', Validators.required],
         status: ['', Validators.required],
         doc: ['', Validators.required],
-        fees: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      
     });
+
+this.getsubstream()
+
   }
 
+  checkActionType() {
+   
+    if (this.addbatchForm.value.type == "Update") {
+   // this.updatesubstream();
+    }
+    else if (this.addbatchForm.value.type == "Create") {
+     this.addbatch();
+    }
+    else {
+//console.log(this.data.type)
+    }
+  }
   closepopup(){
     
+  }
+
+  addbatch() {
+    console.log(this.addbatchForm.value)
+    if (this.addbatchForm.valid) {
+      this.service.addbatch(this.addbatchForm.value, "Batch/addstream").subscribe(result => {
+        this.data = result;
+        console.log(this.data)
+        confirm('Added Batch successfully')
+        this.closepopup();
+      })
+    } else {
+      alert('fail')
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  getsubstream() {
+    debugger
+    this.service.getSubStream("addSubStream/getsubstream").subscribe(subStreamnames => {
+      this.getdatasubstream = subStreamnames;
+
+    });
   }
 }
