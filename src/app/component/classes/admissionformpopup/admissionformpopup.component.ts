@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MasterService } from 'src/app/service/master.service';
 
 @Component({
   selector: 'app-admissionformpopup',
@@ -7,26 +9,32 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./admissionformpopup.component.css']
 })
 export class AdmissionformpopupComponent implements OnInit {
-  admissionForm!: FormGroup;
+  admissionForm: FormGroup;
   showOTPVerification: boolean = false;
   selected: string = '';
+  inquiryFormdata: any;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: MasterService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
 
-      // Student Details
-      this.admissionForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        dob: ['', Validators.required],
-        address: ['', Validators.required],
-        contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', Validators.required],
-        course: ['', Validators.required],
-        previousQualification: ['', Validators.required],
-        collegeName: ['', Validators.required],
-      
+    // Student Details
+    this.admissionForm = this.formBuilder.group({
+      inquirydataserach: ['', Validators.required],
+      name: ['', Validators.required],
+      dob: ['', Validators.required],
+      address: ['', Validators.required],
+      contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      email: ['', [Validators.required, Validators.email]],
+      gender: ['', Validators.required],
+      course: ['', Validators.required],
+      previousQualification: ['', Validators.required],
+      collegeName: ['', Validators.required],
+
       // Add other student details form controls and validations here
 
       // Parents Details
@@ -36,12 +44,12 @@ export class AdmissionformpopupComponent implements OnInit {
       // email: ['', [Validators.required, Validators.email]],
       // contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       otp: [''],
-     
+
       streamName: ['', Validators.required],
       substreamName: ['', Validators.required],
       batchName: ['', Validators.required],
       dateofadmission: ['', Validators.required],
-     
+
       totalFees: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       discount: ['', Validators.required],
       gst: ['', Validators.required],
@@ -51,8 +59,8 @@ export class AdmissionformpopupComponent implements OnInit {
       secondinstallmenamount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       secondinstallmentdate: ['', Validators.required],
       thirdinstallmenamount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      thirdinstallmentdate: ['', Validators.required], 
-      
+      thirdinstallmentdate: ['', Validators.required],
+
       paymentType: [''],
       paymentMode: [''],
       fullPayment: [false],
@@ -62,17 +70,18 @@ export class AdmissionformpopupComponent implements OnInit {
       onlineAmount: [''],
       upi: [''],
       card: [''],
-      banking:  [''],
+      banking: [''],
       offlineAmount: [''],
       offlineCollectedBy: [''],
       numberOfInstallments: ['1'],
 
     });
+    this.getInquiryForm();
   }
 
   onSubmit() {
     if (this.admissionForm.valid) {
-    
+
       console.log(this.admissionForm.value);
     }
   }
@@ -87,4 +96,13 @@ export class AdmissionformpopupComponent implements OnInit {
   onSelectionChange() {
 
   }
+
+  getInquiryForm() {
+    this.service.getInquiryFormData("InquiryForm/InquiryFormData").subscribe(inquiryformdata => {
+      this.inquiryFormdata = inquiryformdata;
+
+    });
+  }
+
+
 }

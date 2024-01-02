@@ -7,7 +7,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="datePicker" formControlName="date" placeholder="Date" />
+        <input matInput [matDatepicker]="datePicker" formControlName="date_of_birth" placeholder="DOB" />
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
         <mat-datepicker #datePicker></mat-datepicker>
       </mat-form-field>
@@ -26,14 +26,16 @@
 
       <mat-form-field>
         <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender">
-          <mat-option value="science">Science</mat-option>
+        <mat-select formControlName="gender"  placeholder="select">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+          <mat-option value="Others">Others</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Date of creation</mat-label>
-        <input matInput formControlName="date_of_birth"[matDatepicker]="picker">
+        <input matInput formControlName="date"[matDatepicker]="picker" placeholder="Date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
        </mat-form-field>

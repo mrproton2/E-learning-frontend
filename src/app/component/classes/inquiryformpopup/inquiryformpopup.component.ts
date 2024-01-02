@@ -45,9 +45,9 @@ export class InquiryformpopupComponent implements OnInit {
       addinquiry_pk: [''],
       type: ['Create', Validators.required],
       name: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       address: ['', Validators.required],
-      contact_no: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      contact_no: ['', [Validators.maxLength(10),Validators.minLength(10),Validators.required, Validators.pattern('^[0-9]*$'),]],
       email_id: ['', Validators.required,],
       gender: ['', Validators.required],
       date_of_birth: ['', Validators.required],
@@ -95,6 +95,8 @@ export class InquiryformpopupComponent implements OnInit {
     this.ref.close('Closed using function');
   }
   addInquiryForm() {
+    console.log(this.inquiryForm.value)
+    debugger
     if (this.inquiryForm.valid) {
       this.service.addInquiry(this.inquiryForm.value, "InquiryForm/addInquiryForm").subscribe(result => {
         this.data = result;

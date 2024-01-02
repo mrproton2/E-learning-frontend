@@ -92,7 +92,6 @@ this.showInquiryForm();
 
 
   showInquiryForm() {
-  
     this.service.getInquiryFormData("InquiryForm/InquiryFormData").subscribe(inquiryformdata => {
       this.dataSource = inquiryformdata;
       console.log(this.dataSource)

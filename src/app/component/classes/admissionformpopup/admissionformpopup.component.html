@@ -1,7 +1,24 @@
 <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
-    <!-- Student Details -->
+ <h2> <mat-card-title>Admission Form</mat-card-title></h2>
+    <diV>
+      <h4>Search Inquiry</h4>
+      <mat-form-field>
+        <input type="text" matInput formControlName="inquirydataserach" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let inquirydata of inquiryFormdata" [value]="inquirydata.contact_no">{{ inquirydata.contact_no }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field> 
+
+      <!-- <mat-form-field>
+        <mat-label>Select Phone No</mat-label>
+        <mat-select formControlName="inquirydataserach" >
+          <mat-option *ngFor="let inquirydata of inquiryFormdata" [value]="inquirydata.addinquiry_pk">{{ inquirydata.contact_no }}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+    </diV>
     <div>
-    <h3>Student Details</h3>
+    <h4>Student Details</h4>
     <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" required>
@@ -58,7 +75,7 @@
     <!-- Add other student details fields here -->
   <div>
     <!-- Parents Details -->
-    <h3>Parents Details</h3>
+    <h4>Parents Details</h4>
     <mat-form-field>
         <mat-label>Parent's Name</mat-label>
         <input matInput formControlName="parentName" required>
@@ -99,7 +116,7 @@
     <!-- Add other parents details fields here -->
 </div>
 <div>
-    <h3>Stream/Substream/Batch Selection</h3>
+    <h4>Stream/Substream/Batch Selection</h4>
     <!-- Stream Selection -->
     <mat-form-field>
         <mat-label>Stream Name</mat-label>
@@ -121,7 +138,7 @@
     <!-- Add other stream selection fields here -->
   <div>
     <!-- Fees Structure -->
-    <h3>Fees Structure</h3>
+    <h4>Fees Structure</h4>
     <mat-form-field>
         <mat-label>Total Fees</mat-label>
         <input matInput formControlName="totalFees" required pattern="[0-9]*">

@@ -147,4 +147,11 @@ deletebatch(data: any, url: any){
   return this.http.delete(url+data);
 }
 
+//AddFacultyOrStaff
+
+
+addfaculty(data: any, url: any) {
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
 }
