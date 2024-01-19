@@ -1,65 +1,70 @@
-<form [formGroup]="classprofileForm">
-   
-    <div>
+<form [formGroup]="classprofileForm" (ngSubmit)="checkActionType()">
+
+  <div>
     <h3>Class Details</h3>
     <mat-form-field>
-        <mat-label>classes Name</mat-label>
-        <input matInput formControlName="name" required>
-      </mat-form-field>
-    
-      <mat-form-field>
-        <mat-label>Date Of Establishment</mat-label>
-        <input matInput [matDatepicker]="dobPicker" formControlName="doc" required>
-        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-        <mat-datepicker #dobPicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Solgan</mat-label>
-        <input matInput formControlName="slogan" required>
-      </mat-form-field>
+      <mat-label>classes Name</mat-label>
+      <input matInput formControlName="classname" required>
+    </mat-form-field>
 
-      <mat-form-field>
-        <!-- select file upload image -->
+    <mat-form-field>
+      <mat-label>Date Of Establishment</mat-label>
+      <input matInput [matDatepicker]="dobPicker" formControlName="date_of_creation" required>
+      <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+      <mat-datepicker #dobPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Solgan</mat-label>
+      <input matInput formControlName="slogan" required>
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+       
         <mat-label>Logo</mat-label>
-        <input matInput formControlName="logo" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Branch Name</mat-label>
-        <input matInput formControlName="branchname" required>
-      </mat-form-field>
-    
-      
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="address" required>
-      </mat-form-field>
-    
-      <mat-form-field>
-        <mat-label>Contact No.</mat-label>
-        <input matInput formControlName="contactNo" required pattern="[0-9]*">
-        <mat-hint align="end" >Only digits allowed</mat-hint>
-      </mat-form-field>
-    
-      <mat-form-field>
-        <mat-label>Email ID</mat-label>
-        <input matInput formControlName="email" required email>
-        <mat-error *ngIf="classprofileForm.get('email')?.invalid">Invalid email format</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Pan No</mat-label>
-        <input matInput formControlName="panno" required>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Aadhar No</mat-label>
-        <input matInput formControlName="aadharno" required>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>GST NO</mat-label>
-        <input matInput formControlName="gstno" required>
-      </mat-form-field>
-      <div>
-      <button style="margin-left: 45%;" (click)="onSubmit()" mat-raised-button color="primary">Save</button>
-      </div>
+        <input matInput formControlName="logo" (change)="onFileChange($event)">
+      </mat-form-field> -->
+
+    <div class="form-group">
+      <label for="file">Logo</label>
+      <input formControlName="myFile" id="file" type="file" class="form-control" (change)="handleFileInput($event)">
+      <img [src]="classLogo" title="image" height="150px" width="150px">
     </div>
-      </form>
+
+    <mat-form-field>
+      <mat-label>Branch Name</mat-label>
+      <input matInput formControlName="branchname" required>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contact No.</mat-label>
+      <input matInput formControlName="contact" required pattern="[0-9]*">
+      <mat-hint align="end">Only digits allowed</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email ID</mat-label>
+      <input matInput formControlName="email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pan No</mat-label>
+      <input matInput formControlName="panno" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Aadhar No</mat-label>
+      <input matInput formControlName="aadharno" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>GST NO</mat-label>
+      <input matInput formControlName="gstno" required>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button id="btnsave" type="submit" color="primary">Save</button>
+    </div>
+  </div>
+</form>

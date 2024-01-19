@@ -107,6 +107,7 @@ export class AddfacultyetcpopupComponent implements OnInit {
     }
   }
   addstaff() {
+    console.log(this.addstaffForm.value)
     debugger
     if (this.addstaffForm.valid) {
       this.service.addfaculty(this.addstaffForm.value, "AddFacultyOrStaff/addstaff").subscribe(result => {

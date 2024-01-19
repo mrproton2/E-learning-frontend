@@ -41,6 +41,7 @@ export class AddsubstreampopupComponent implements OnInit {
 
     this.tabledata = this.data
     if (this.tabledata.addsubstream_pk > 0) {
+      debugger
       this.addsubstreamForm.patchValue({
         title: this.tabledata.title,
         type: this.tabledata.type,
@@ -89,6 +90,7 @@ export class AddsubstreampopupComponent implements OnInit {
   }
 
   updatesubstream() {
+    debugger
     const pk = this.addsubstreamForm.getRawValue().addsubstream_pk;
     if (pk != '' && pk != null) {
       this.service.updateSubStream(pk, this.addsubstreamForm.getRawValue(), "addSubStream/updatesubstream").subscribe(result => {

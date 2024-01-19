@@ -1,27 +1,10 @@
 <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
  <h2> <mat-card-title>Admission Form</mat-card-title></h2>
-    <diV>
-      <h4>Search Inquiry</h4>
-      <mat-form-field>
-        <input type="text" matInput formControlName="inquirydataserach" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let inquirydata of inquiryFormdata" [value]="inquirydata.contact_no">{{ inquirydata.contact_no }}</mat-option>
-        </mat-autocomplete>
-      </mat-form-field> 
-
-      <!-- <mat-form-field>
-        <mat-label>Select Phone No</mat-label>
-        <mat-select formControlName="inquirydataserach" >
-          <mat-option *ngFor="let inquirydata of inquiryFormdata" [value]="inquirydata.addinquiry_pk">{{ inquirydata.contact_no }}</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
-    </diV>
     <div>
     <h4>Student Details</h4>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" required>
+        <input matInput formControlName="studentname" required>
       </mat-form-field>
     
       <mat-form-field>
@@ -44,23 +27,20 @@
     
       <mat-form-field>
         <mat-label>Email ID</mat-label>
-        <input matInput formControlName="email" required email>
-        <mat-error *ngIf="admissionForm.get('email')?.invalid">Invalid email format</mat-error>
+        <input matInput formControlName="email" required>
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Gender</mat-label>
         <mat-select formControlName="gender" required>
-          <mat-option value="male">Male</mat-option>
-          <mat-option value="female">Female</mat-option>
-          <mat-option value="others">Others</mat-option>
+          <mat-option value={{tabledata.gender}}>{{tabledata.gender}}</mat-option>
         </mat-select>
       </mat-form-field>
     
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Course</mat-label>
         <input matInput formControlName="course" required>
-      </mat-form-field>
+      </mat-form-field> -->
     
       <mat-form-field>
         <mat-label>Previous Qualification</mat-label>
@@ -69,12 +49,16 @@
     
       <mat-form-field>
         <mat-label>College Name/School Name</mat-label>
-        <input matInput formControlName="collegeName" required>
+        <input matInput formControlName="school_college_name" required>
       </mat-form-field>
     </div>
-    <!-- Add other student details fields here -->
+
+
+
+  <!-- Parents Details -->
+    
   <div>
-    <!-- Parents Details -->
+  
     <h4>Parents Details</h4>
     <mat-form-field>
         <mat-label>Parent's Name</mat-label>
@@ -94,39 +78,49 @@
     
       <mat-form-field>
         <mat-label>Email ID</mat-label>
-        <input matInput formControlName="email" required email>
-        <mat-error *ngIf="admissionForm.get('email')?.invalid">Invalid email format</mat-error>
+        <input matInput formControlName="parentemail" required >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Contact No.</mat-label>
-        <input matInput formControlName="contactNo" required pattern="[0-9]*">
+        <input matInput formControlName="parentcontactNo" required pattern="[0-9]*">
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
     
-      <button mat-raised-button color="primary" (click)="onVerify()">Verify</button>
+      <!-- <button mat-raised-button color="primary" (click)="onVerify()">Verify</button> -->
     
       <div *ngIf="showOTPVerification">
         <mat-form-field>
           <mat-label>OTP</mat-label>
           <input matInput formControlName="otp" required>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="onOTPVerify()">Verify OTP</button>
+        <!-- <button mat-raised-button color="primary" (click)="onOTPVerify()">Verify OTP</button> -->
       </div>
     <!-- Add other parents details fields here -->
 </div>
+
 <div>
     <h4>Stream/Substream/Batch Selection</h4>
     <!-- Stream Selection -->
-    <mat-form-field>
+   
+
+      <mat-form-field >
         <mat-label>Stream Name</mat-label>
-        <input matInput formControlName="streamName" required>
+        <mat-select formControlName="stream_name"  (selectionChange)="onSelect($event.value)">
+
+          <!-- <mat-option value={{tabledata.stream_name}}>{{tabledata.stream_name}}</mat-option> -->
+          <mat-option *ngFor="let streamdatas of streamdata"  [value]="streamdatas.addstream_pk">{{ streamdatas.stream_name }}</mat-option>
+        </mat-select>
       </mat-form-field>
+
     
       <mat-form-field>
-        <mat-label>Substream Name</mat-label>
-        <input matInput formControlName="substreamName" required>
+        <mat-label>SubStream Name</mat-label>
+        <mat-select formControlName="substream_name">
+          <mat-option *ngFor="let streamdatas of selectedstream" [value]="streamdatas.addsubstream_pk">{{ streamdatas.sub_stream_name }}</mat-option>
+        </mat-select>
       </mat-form-field>
+      
     
       <mat-form-field>
         <mat-label>Batch Name</mat-label>
@@ -162,15 +156,19 @@
     
       <mat-form-field>
         <mat-label>Fees Including GST</mat-label>
-        <input matInput formControlName="feeswithoutgst" required pattern="[0-9]*">
+        <input matInput formControlName="feeswithgst" required pattern="[0-9]*">
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
     <!-- Add other fees structure fields here -->
 </div>
+
+
+
 <div>
   <mat-radio-group formControlName="paymentType">
     <mat-radio-button value="fullPayment">Full Payment</mat-radio-button>
     <mat-radio-button value="installmentMode">Installment Mode</mat-radio-button>
+    
   </mat-radio-group>
 
   <div *ngIf="admissionForm.get('paymentType')?.value === 'fullPayment' || admissionForm.get('paymentType')?.value === 'installmentMode'">
@@ -178,18 +176,14 @@
       <div>
         <mat-form-field>
             <mat-label>Number of Installment </mat-label>
-                <mat-select formControlName="numberOfInstallments" [(ngModel)]="selected" (ngModelChange)="onSelectionChange()">
+                <mat-select formControlName="numberOfInstallments" >
               <!-- <mat-option value="1st">1 Installment</mat-option> -->
               <mat-option value="2nd">2 Installments</mat-option>
               <mat-option value="3rd">3 Installments</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <!-- <div *ngIf="selected === '1st'">
-        
-          </div> -->
-
-          <div *ngIf="selected === '2nd'">
+         <div *ngIf="admissionForm.get('numberOfInstallments').value === '2nd'">
             <mat-form-field>
               <mat-label>Amount</mat-label>
               <input matInput formControlName="amount" required pattern="[0-9]*">
@@ -208,7 +202,7 @@
             </mat-form-field>
         
           </div>
-             <div *ngIf="selected === '3rd'">
+          <div *ngIf="admissionForm.get('numberOfInstallments').value === '3rd'">
               <mat-form-field>
                 <mat-label>Amount</mat-label>
                 <input matInput formControlName="amount" required pattern="[0-9]*">
@@ -252,6 +246,9 @@
         
         </div>
       </div>
+
+
+      
     <mat-radio-group formControlName="paymentMode">
       <mat-radio-button value="onlineMode">Online Mode</mat-radio-button>
       <mat-radio-button value="offlineMode">Offline Mode</mat-radio-button>
@@ -264,9 +261,9 @@
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
      
-      <mat-radio-button formControlName="upi">UPI</mat-radio-button>
-      <mat-radio-button formControlName="card">Card</mat-radio-button>
-      <mat-radio-button formControlName="banking">Banking</mat-radio-button>
+      <mat-radio-button >UPI</mat-radio-button>
+      <mat-radio-button >Card</mat-radio-button>
+      <mat-radio-button >Banking</mat-radio-button>
    
     </div>
 

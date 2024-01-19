@@ -64,6 +64,8 @@ export class AddstreamComponent implements OnInit {
   showstream() {
     this.service.getstream("data/getstream").subscribe(Streamnames => {
       this.dataSource = Streamnames;
+      debugger
+      console.log(this.dataSource)
       this.dataSource = new MatTableDataSource<substream>(this.dataSource);
       this.dataSource.paginator = this.paginatior;
       this.dataSource.sort = this.sort;
@@ -81,8 +83,8 @@ export class AddstreamComponent implements OnInit {
 
   editstream(data: any, title: any, type: any) {
     if (confirm('Are you sure??')) {
+      debugger
       this.Openpopup(data, title, type, AddstreampopComponent)
-
     }
   }
 }

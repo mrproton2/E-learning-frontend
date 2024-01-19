@@ -138,9 +138,9 @@ export class InquiryformpopupComponent implements OnInit {
   }
 
   onSelect(s_pk: number) {
+    debugger
     this.selectedstream = this.substreamdata.filter((item) => item.stream_pk == s_pk);
     console.log(this.selectedstream)
-
   }
 }
 

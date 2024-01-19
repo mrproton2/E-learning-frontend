@@ -154,4 +154,18 @@ addfaculty(data: any, url: any) {
   url = this.baseurl + url;
   return this.http.post(url, data);
 }
+
+//classprofile
+
+
+// addclassprofile(data: any, url: any) {
+//   debugger
+//   url = this.baseurl + url;
+//   return this.http.post(url, data);
+// }
+getClassProfile(url: any): Observable<any[]> {
+  url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+
 }
