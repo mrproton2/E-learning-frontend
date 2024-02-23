@@ -6,7 +6,7 @@
     <span> Class Panel</span>
     <span class="example-spacer"></span>
     <button mat-flat-button color="warn" routerLink="classprofile">Profile</button>
-        
+    <button mat-flat-button color="accent" (click)="logout()">Logout</button>
     
 </mat-toolbar>
 <mat-drawer-container autosize>
@@ -36,7 +36,7 @@
         </mat-list-item>
        
         <mat-list-item>
-            <button routerLink="admissionform" mat-button><mat-icon></mat-icon>Admission Form</button>
+            <button routerLink="admissionform" mat-button><mat-icon></mat-icon>Admission Verification</button>
         </mat-list-item>
         <mat-list-item>
             <button routerLink="generateidpassword" mat-button><mat-icon></mat-icon>Generate ID-Password</button>
@@ -78,7 +78,7 @@
     <mat-drawer-content>
         <div style="height: 600px;">
            
-           
+      
             <router-outlet></router-outlet>
             </div>
     </mat-drawer-content>

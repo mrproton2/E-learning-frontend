@@ -1,17 +1,7 @@
 <form [formGroup]="addfacultyForm" (ngSubmit)="checkActionType()">
   <div>
     <h3>ADD Faculty/Staff</h3>
-    <div>
-      <mat-form-field>
-        <mat-label>Type Of Employee</mat-label>
-        <mat-select formControlName="employee">
-          <mat-option value="faculty">Faculty</mat-option>
-          <mat-option value="staff">Staff</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div *ngIf="addfacultyForm.get('employee').value === 'faculty'">
-      <mat-form-field>
+       <mat-form-field>
         <mat-label>Name of Faculty</mat-label>
         <input matInput formControlName="fname" required>
       </mat-form-field>
@@ -54,9 +44,15 @@
 
       <mat-form-field>
         <mat-label>Select Subject</mat-label>
+        <mat-select formControlName="fsubstream" (selectionChange)="onSelect($event.value)">
+          <mat-option *ngFor="let degreeTitle of SubStreamdataSource" [value]="degreeTitle.addsubstream_pk">{{degreeTitle.sub_stream_name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Select Subject</mat-label>
         <mat-select formControlName="fsubject">
-          <mat-option *ngFor="let degreeTitle of subjectdatasource" [value]="degreeTitle.subject_pk">{{
-            degreeTitle.subjects }}</mat-option>
+          <mat-option *ngFor="let degreeTitle of selectedsubstream" [value]="degreeTitle.subject_pk">{{degreeTitle.subjects }}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -102,98 +98,9 @@
         <input matInput formControlName="fifsc_code" required>
       </mat-form-field>
       <div> <button mat-raised-button id="btnsave" type="submit" color="primary">add faculty</button>
+        
       </div>
     </div>
 
-  </div>
-</form>
-<form [formGroup]="addstaffForm" (ngSubmit)="checkActionType()">
-  <div *ngIf="addstaffForm.get('employee').value === 'staff'">
-    <input matInput formControlName="employee" hidden> 
-    <mat-form-field>
-      <mat-label>Name of Staff</mat-label>
-      <input matInput formControlName="sname" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Date of Birth</mat-label>
-      <input matInput [matDatepicker]="dobPicker" formControlName="sdob" required>
-      <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-      <mat-datepicker #dobPicker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Address</mat-label>
-      <input matInput formControlName="saddress" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Contact No.</mat-label>
-      <input matInput formControlName="scontact" required pattern="[0-9]*">
-      <mat-hint align="end">Only digits allowed</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Email ID</mat-label>
-      <input matInput formControlName="semailid" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Gender</mat-label>
-      <mat-select formControlName="sgender" required>
-        <mat-option value="male">Male</mat-option>
-        <mat-option value="female">Female</mat-option>
-        <mat-option value="others">Others</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Post</mat-label>
-      <input matInput formControlName="spost" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Qualification</mat-label>
-      <input matInput formControlName="squalification" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Experience</mat-label>
-      <input matInput formControlName="sexperience" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Pan No</mat-label>
-      <input matInput formControlName="span_no" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Aadhar No</mat-label>
-      <input matInput formControlName="saadhar_no" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>TDS Number</mat-label>
-      <input matInput formControlName="stsd_no" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Salary</mat-label>
-      <input matInput formControlName="ssalary" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Account No:</mat-label>
-      <input matInput formControlName="saccout_no" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>IFSC Code</mat-label>
-      <input matInput formControlName="sifsc_code" required>
-    </mat-form-field>
-    <div>
-      <button mat-raised-button id="btnsave" type="submit" color="primary">Add Staff</button>
-    </div>
-
-  </div>
-
+ 
 </form>

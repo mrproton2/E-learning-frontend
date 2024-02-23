@@ -10,3 +10,13 @@ th{
     background-color: black !important;
     color: white;
 }
+.table-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow tables to wrap to new lines on smaller screens */
+  }
+  
+  .mat-table {
+    flex: 1; /* Each table takes equal space */
+    margin: 0 10px; /* Adjust margin as needed */
+  }
+  

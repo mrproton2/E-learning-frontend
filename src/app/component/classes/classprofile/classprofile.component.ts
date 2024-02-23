@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MasterService } from 'src/app/service/master.service';
-import { ClassdashboardpopupComponent } from '../classdashboardpopup/classdashboardpopup.component';
+
 import { ClassprofilepopComponent } from '../classprofilepop/classprofilepop.component';
 
 @Component({
@@ -14,6 +14,7 @@ export class ClassprofileComponent implements OnInit {
   classProfileForm: FormGroup;
   profiledataSource: any;
   classLogo='src\assets\WhatsApp Image 2023-10-10 at 00.14.54.jpeg';
+  @Input() editable: boolean = false;
 
 
 
@@ -23,16 +24,16 @@ export class ClassprofileComponent implements OnInit {
   ngOnInit() {
 
     this.classProfileForm = this.formBuilder.group({
-      classname: [{value: '', disabled: true}],
-      date_of_creation:[{value: '', disabled: true}],
-      slogan: [{value: '', disabled: true}],
-      branchname: [{value: '', disabled: true}],
-      address: [{value: '', disabled: true}],
-      contact: [{value: '', disabled: true}],
-      email: [{value: '', disabled: true}],
-      panno:[{value: '', disabled: true}],
-      aadharno: [{value: '', disabled: true}],
-      gstno: [{value: '', disabled: true}],
+      classname: [''],
+      date_of_creation:[''],
+      slogan: [''],
+      branchname: [''],
+      address: [''],
+      contact: [''],
+      email: [''],
+      panno:[''],
+      aadharno: [''],
+      gstno: [''],
       FilePath:['']
 
     });

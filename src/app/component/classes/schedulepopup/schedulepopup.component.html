@@ -4,98 +4,84 @@
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Select Substream</mat-label>
-      <mat-select disableRipple formControlName="name">
-        <mat-option value="1">Jee</mat-option>
-        <mat-option value="2">NEET</mat-option>
-        <mat-option value="3">MBA</mat-option>
+      <mat-select formControlName="substreamname" (selectionChange)="selectbatch($event.value)">
+        <mat-option *ngFor="let substreamdatas of dataSourcesubstream" [value]="substreamdatas.addsubstream_pk">{{
+          substreamdatas.sub_stream_name }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-     <mat-form-field>
+    <mat-form-field>
       <mat-label>Select Batch</mat-label>
-      <mat-select disableRipple formControlName="batch">
-        <mat-option value="1">Batch 1</mat-option>
-        <mat-option value="2">Batch 2</mat-option>
-        <mat-option value="3">Batch 3</mat-option>
+      <mat-select disableRipple formControlName="batchname">
+        <mat-option *ngFor="let batchdatas of selectedbatchname" [value]="batchdatas.addbatch_pk">{{batchdatas.batch_name }}</mat-option>
       </mat-select>
     </mat-form-field>
-    
-    
-
-    <table class="table table-bordered" formArrayName="subjects">
-      <tr>
-        <th colspan="3">Add Multiple Lecture:</th>
-        <th width="auto">
-          <button mat-raised-button color="accent" type="button" (click)="addlecture()">Add Lecture</button>
-          <!-- <button mat-raised-button >Add Subject</button> -->
-        </th>
-      </tr>
-      <tr *ngFor="let subject of subjects.controls; let i=index" [formGroupName]="i">
-        <td>
-          <mat-form-field>
-            <mat-label>Subject Name:</mat-label>
-            <input matInput type="text" formControlName="sub">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-label>Type</mat-label>
-            <input matInput type="text" formControlName="type">
-          </mat-form-field>
-        </td>
-        <td>
-        <mat-form-field>
-          <mat-label>Select Faculty</mat-label>
-          <mat-select disableRipple formControlName="faculty">
-            <mat-option value="1">Batch 1</mat-option>
-            <mat-option value="2">Batch 2</mat-option>
-            <mat-option value="3">Batch 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        
 
 
+  
+      <table class="table table-bordered" formGroupName="subjectdetails">
+        <tr>
+          <th colspan="5">
+            <button  style="margin-left: 5px;" mat-raised-button color="accent" type="button" (click)="addsubjectarray()">Add Schedule</button>
+          
+          </th>
+         
+        </tr>
+        <tr *ngFor="let subject of subjectdetails.controls; let i=index" [formGroupName]="i">
+            <td>
+              <mat-form-field>
+                <mat-label>Subject Name</mat-label>
+                <mat-select disableRipple formControlName="subjectname">
+                  <mat-option *ngFor="let subjectdata of selectedsubject" [value]="subjectdata.subject_pk">{{
+                    subjectdata.subjects }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Faculty Name</mat-label>
+              <mat-select disableRipple formControlName="facultyname">
+                <mat-option *ngFor="let facultydata of selectedfaculty" [value]="facultydata.add_faculty_pk">{{
+                  facultydata.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Date</mat-label>
+              <input matInput formControlName="dateoflecture" id="dateoflecture" [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Lecture Start Time</mat-label>
+              <input matInput type="text" formControlName="startTime">
+            </mat-form-field>
 
-      </td>
-      <td>
-     
-      </td>
-      <td>
-        
-      </td>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>End Time</mat-label>
+              <input matInput type="text" formControlName="endTime">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Notice</mat-label>
+              <input matInput type="text" formControlName="notice">
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button (click)="removesubject(i)">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
 
-
-      <td>
-        <mat-form-field>
-          <mat-label>Announcement</mat-label>
-          <input matInput type="text" formControlName="notice">
-        </mat-form-field>
-      </td>
-        <!-- <td>
-          <mat-form-field>
-            <mat-label>Price:</mat-label>
-            <input matInput type="text" formControlName="price">
-          </mat-form-field>
-        </td> -->
-        <td>
-          <button mat-icon-button (click)="removesubject(i)">
-            <mat-icon>remove_circle</mat-icon>
-          </button>
-        </td>
-      </tr>
-    </table>
-
-    <!-- <button mat-raised-button  class="btn btn-success">Submit</button> -->
-    <button mat-raised-button color="primary" type="submit" >Submit</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>
 
 

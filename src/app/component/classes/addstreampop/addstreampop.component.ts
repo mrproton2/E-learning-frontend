@@ -51,6 +51,7 @@ export class AddstreampopComponent implements OnInit {
       this.updatestream();
     }
     else if (this.addStreamGrp.value.type == "Create") {
+      debugger
       console.log(this.addStreamGrp.value.type)
       this.addstream()
     }
@@ -77,6 +78,7 @@ export class AddstreampopComponent implements OnInit {
 
   addstream() {
     if (this.addStreamGrp.valid) {
+      debugger
       this.service.addstream(this.addStreamGrp.value, "data/addstream").subscribe(result => {
         this.data = result;
         this.toastr.success('Stream is Created')

@@ -86,6 +86,8 @@ export class AddbatchComponent implements OnInit{
 
 
   }
-  editstream(data: any, title: any, type: any) {}
+  editstream(data: any, title: any, type: any) {
+    
+  }
 
 }

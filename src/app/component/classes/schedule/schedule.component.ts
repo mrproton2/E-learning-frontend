@@ -24,6 +24,9 @@ export class ScheduleComponent  {
   displayedColumns: string[] = ["srno", "batchname", "DOC", "status"];
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
+  dataSource1 = new MatTableDataSource<any>(); // Define your data source
+  dataSource2 = new MatTableDataSource<any>(); // Define your data source
+
 
   constructor(private service: MasterService, private dialog: MatDialog) {
     this.loadcustomer();

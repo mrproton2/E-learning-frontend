@@ -45,90 +45,106 @@ import { AttedanceInParentsComponent } from './component/parents/attedance-in-pa
 import { ScheduleInParentsComponent } from './component/parents/schedule-in-parents/schedule-in-parents.component';
 import { ResultInParentsComponent } from './component/parents/result-in-parents/result-in-parents.component';
 import { FeesstatusComponent } from './component/parents/feesstatus/feesstatus.component';
-import { NotificationComponent } from './component/parents/notification/notification.component';
+
 import { FeepaymentInParentsComponent } from './component/parents/feepayment-in-parents/feepayment-in-parents.component';
 import { StudentresultComponent } from './component/student/studentresult/studentresult.component';
 import { UploadmarksComponent } from './component/classes/uploadmarks/uploadmarks.component';
 import { StudentvideolecturepanelComponent } from './component/student/studentvideolecturepanel/studentvideolecturepanel.component';
 import { StudentlecturepanelComponent } from './component/student/studentlecturepanel/studentlecturepanel.component';
+import { guardGuard } from './guard.guard';
+import { testgaurdGuard } from './testgaurd.guard';
+import { StudentprofileComponent } from './component/student/studentprofile/studentprofile.component';
+import { ResetstudnetpasswordComponent } from './component/student/resetstudnetpassword/resetstudnetpassword.component';
+import { StudentscheduleComponent } from './component/student/studentschedule/studentschedule.component';
+import { AttendancesubjectpopComponent } from './component/classes/attendancesubjectpop/attendancesubjectpop.component';
+
 
 
 const routes: Routes = [
- 
-  //{path:'',component:HomeComponent},
-    {path:'',component:LoginComponent},
-    {path:'login',component:LoginComponent},
 
-// faculty routing
-{path:'facultydefault',component:FacultydefaultComponent,
-    children:[ 
-      {path:'facultydashboard',component:FacultydashboardComponent},
-      {path:'facultyprofile',component:FacultyprofileComponent},
-      {path:'raiseddoubt',component:RaiseddoubtComponent},
-      {path:'facultyattendance',component:FacultyattendanceComponent},
-      {path:'salarystatus',component:SalarystatusComponent},
-      {path:'uploadmaterial',component:UploadmaterialfacultyComponent},
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+
+  // faculty routing
+  {
+    path: 'facultydefault', component: FacultydefaultComponent,canActivateChild:[guardGuard],canActivate:[testgaurdGuard],
+    children: [
+      { path: 'facultydashboard', component: FacultydashboardComponent },
+      { path: 'facultyprofile', component: FacultyprofileComponent },
+      { path: 'raiseddoubt', component: RaiseddoubtComponent },
+      { path: 'facultyattendance', component: FacultyattendanceComponent },
+      { path: 'salarystatus', component: SalarystatusComponent },
+      { path: 'uploadmaterial', component: UploadmaterialfacultyComponent },
 
 
-  ]},
-// parents routing
+    ]
+  },
+  // parents routing
 
-{path:'parentsdefault',component:ParentsdefaultComponent,
-    children:[ 
-      
-      {path:'parentsdashboard',component:ParentsdashboardComponent},
-      {path:'attedance-in-parents',component:AttedanceInParentsComponent},
-      {path:'schedule-in-parents',component:ScheduleInParentsComponent},
-      {path:'result-in-parents',component:ResultInParentsComponent},
-      {path:'feesstatus',component:FeesstatusComponent},
-      {path:'feepayment',component:FeepaymentInParentsComponent},
-      {path:'notification',component:NotificationComponent},
-    ]},
+  {
+    path: 'parentsdefault', component: ParentsdefaultComponent,canActivateChild:[guardGuard],canActivate:[testgaurdGuard],
+    children: [
+      { path: 'parentsdashboard', component: ParentsdashboardComponent },
+      { path: 'attedance-in-parents', component: AttedanceInParentsComponent },
+      { path: 'schedule-in-parents', component: ScheduleInParentsComponent },
+      { path: 'result-in-parents', component: ResultInParentsComponent },
+      { path: 'feesstatus', component: FeesstatusComponent },
+      { path: 'feepayment', component: FeepaymentInParentsComponent },
+    ]
+  },
 
-// student routing
+  // student routing
 
-    {path:'studentdefault',component:StudentdefaultComponent,
-    children:[
-       {path:'studentdashboard',component:StudentdashboardComponent},
-       {path:'myclasses',component:StudentmyclassesComponent},
-                //  children:[ {path:'studentvideolecturepanel',component:StudentvideolecturepanelComponent},
-                //           ]},
-      {path:'studentvideolecturepanel',component:StudentvideolecturepanelComponent},   
-      {path:'studentlecturepanel',component:StudentlecturepanelComponent},   
-       {path:'studentattendance',component:StudentattendanceComponent},
-       {path:'studentresult',component:StudentresultComponent},
-       {path:'studentaskdoubt',component:StudentaskdoubtComponent},
-       {path:'studenttrackdoubt',component:StudenttrackdoubtComponent},
+  {
+    path: 'studentdefault', component: StudentdefaultComponent,canActivateChild:[guardGuard],canActivate:[testgaurdGuard],
+    children: [
+      { path: 'studentdashboard', component: StudentdashboardComponent },
+      { path: 'myclasses', component: StudentmyclassesComponent },
+      { path: 'studentvideolecturepanel', component: StudentvideolecturepanelComponent },
+      { path: 'studentlecturepanel', component: StudentlecturepanelComponent },
+      { path: 'studentattendance', component: StudentattendanceComponent },
+      { path: 'studentresult', component: StudentresultComponent },
+      { path: 'studentaskdoubt', component: StudentaskdoubtComponent },
+      { path: 'studenttrackdoubt', component: StudenttrackdoubtComponent },
+      { path: 'studentprofile', component: StudentprofileComponent },
+      { path: 'resetstudentpassword', component: ResetstudnetpasswordComponent },
+      { path: 'studentschedule', component: StudentscheduleComponent },
 
-       
-      ]},
-//  classes routing 
-    {path:'classdefault',component:ClassdefaultComponent,
-    children:[  {path:'autocomplete',component:AutocompleteComponent},
-                {path:'input',component:InputComponent},
-                {path:'slider',component:SliderComponent},
-                {path:'table',component:TableComponent},
-                {path:'form',component:FormdesignComponent},
-                {path:'classdashboard',component:ClassdashboardComponent},
-                {path:'associate',component:AssociateComponent},
-                {path:'addstream',component:AddstreamComponent},
-                {path:'addsubstream',component:AddsubstreamComponent},
-                {path:'addbatch',component:AddbatchComponent},
-                {path:'addsubject',component:AddsubjectComponent},
-                {path:'inquiryform',component:InquiryformComponent},
-                {path:'admissionform',component:AdmissionformComponent},
-                {path:'generateidpassword',component:GenerateidpasswordComponent},
-                {path:'invoicereport',component:InvoicereportComponent},
-                {path:'schedule',component:ScheduleComponent},
-                {path:'addfacultyetc',component:AddfacultyetcComponent},
-                {path:'classprofile',component:ClassprofileComponent},
-                {path:'attendance',component:AttendanceComponent},
-                {path:'salary',component:SalaryComponent},
-                {path:'uploadmaterial',component:UploadmaterialComponent},
-                {path:'feespayment',component:FeespaymentComponent},
-                {path:'uploadmarks',component:UploadmarksComponent},
+
+    ]
+  },
+  //  classes routing 
   
-  ]}, 
+
+  {
+    path: 'classdefault', component: ClassdefaultComponent,canActivateChild:[guardGuard],canActivate:[testgaurdGuard],
+    children: [
+      { path: 'autocomplete', component: AutocompleteComponent },
+      { path: 'input', component: InputComponent },
+      { path: 'slider', component: SliderComponent },
+      { path: 'table', component: TableComponent },
+      { path: 'form', component: FormdesignComponent },
+      { path: 'classdashboard', component: ClassdashboardComponent },
+      { path: 'associate', component: AssociateComponent },
+      { path: 'addstream', component: AddstreamComponent },
+      { path: 'addsubstream', component: AddsubstreamComponent },
+      { path: 'addbatch', component: AddbatchComponent },
+      { path: 'addsubject', component: AddsubjectComponent },
+      { path: 'inquiryform', component: InquiryformComponent },
+      { path: 'admissionform', component: AdmissionformComponent },
+      { path: 'generateidpassword', component: GenerateidpasswordComponent },
+      { path: 'invoicereport', component: InvoicereportComponent },
+      { path: 'schedule', component: ScheduleComponent },
+      { path: 'addfacultyetc', component: AddfacultyetcComponent },
+      { path: 'classprofile', component: ClassprofileComponent },
+      { path: 'attendance', component: AttendanceComponent },
+      { path: 'salary', component: SalaryComponent },
+      { path: 'uploadmaterial', component: UploadmaterialComponent },
+      { path: 'feespayment', component: FeespaymentComponent },
+      { path: 'uploadmarks', component: UploadmarksComponent },
+      { path: 'attendancesubjectpop', component: AttendancesubjectpopComponent },
+    ]
+  },
 ];
 
 @NgModule({

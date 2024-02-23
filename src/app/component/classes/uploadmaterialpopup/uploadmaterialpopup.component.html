@@ -1,93 +1,142 @@
 <div class="container">
-    <h1> Add Material </h1>
-  
-    <form [formGroup]="uploadmaterialForm">
-      <mat-form-field>
-        <mat-label>Select Substream</mat-label>
-        <mat-select disableRipple formControlName="name">
-          <mat-option value="1">Jee</mat-option>
-          <mat-option value="2">NEET</mat-option>
-          <mat-option value="3">MBA</mat-option>
-        </mat-select>
+  <h1> Add Materials </h1>
+
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Select Substream</mat-label>
+      <mat-select formControlName="substreamname" (selectionChange)="selectbatch($event.value)">
+        <mat-option *ngFor="let substreamdatas of dataSourcesubstream" [value]="substreamdatas.addsubstream_pk">{{
+          substreamdatas.sub_stream_name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select Batch</mat-label>
+      <mat-select disableRipple formControlName="batchname">
+        <mat-option *ngFor="let batchdatas of selectedbatchname" [value]="batchdatas.addbatch_pk">{{batchdatas.batch_name }}</mat-option>
+      </mat-select>
       </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Subject Name</mat-label>
+          <mat-select disableRipple formControlName="subjectname">
+            <mat-option *ngFor="let subjectdata of selectedsubject" [value]="subjectdata.subject_pk">{{
+              subjectdata.subjects }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+     
+          <mat-form-field>
+            <mat-label>Content Title</mat-label>
+            <input matInput type="text" formControlName="contenttitle">
+          </mat-form-field>
+
       
-      <mat-form-field>
-        <mat-label>Batch</mat-label>
-        <mat-select disableRipple formControlName="batch">
-          <mat-option value="1">Jee</mat-option>
-          <mat-option value="2">NEET</mat-option>
-          <mat-option value="3">MBA</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Subject</mat-label>
-        <mat-select disableRipple formControlName="subject">
-          <mat-option value="1">Jee</mat-option>
-          <mat-option value="2">NEET</mat-option>
-          <mat-option value="3">MBA</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Content Type</mat-label>
-        <mat-select disableRipple formControlName="contenttype">
-          <mat-option value="1">Lecture</mat-option>
-          <mat-option value="2">DPP</mat-option>
-          <mat-option value="3">Assginment</mat-option>
-          <mat-option value="3">Test Paper</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Faculty Name</mat-label>
+          <mat-select disableRipple formControlName="facultyname">
+            <mat-option *ngFor="let facultydata of selectedfaculty" [value]="facultydata.add_faculty_pk">{{
+              facultydata.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+     
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input matInput formControlName="dateofupload" id="dateofupload" [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
       
+        <!-- <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar> -->
+
+        <label for="file">choose file</label>
+          <input formControlName="MyFile" id="myFile" type="file" class="form-control" (change)="handleFileInput($event)">
+         
       
-  
-      <table class="table table-bordered" formArrayName="subjects">
+        <mat-form-field>
+          <mat-label>Upload By</mat-label>
+          <input matInput type="text" formControlName="uploadby">
+        </mat-form-field>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <table class="table table-bordered" formGroupName="subjectdetails">
         <tr>
-          <th colspan="2">Add Material:</th>
-          <th width="150px">
-            <button mat-raised-button color="accent" type="button" (click)="addmaterial()">Add Material</button>
-            <!-- <button mat-raised-button >Add Subject</button> -->
+          <th colspan="5">
+            <button  style="margin-left: 5px;" mat-raised-button color="accent" type="button" (click)="addsubjectarray()">Add Schedule</button>
+          
           </th>
         </tr>
-        <tr *ngFor="let subject of subjects.controls; let i=index" [formGroupName]="i">
+        <tr *ngFor="let subject of subjectdetails.controls; let i=index" [formGroupName]="i">
           <td>
             <mat-form-field>
-              <mat-label>Content Title:</mat-label>
-              <input matInput type="text" formControlName="title">
+              <mat-label>Subject Name</mat-label>
+              <mat-select disableRipple formControlName="subjectname">
+                <mat-option *ngFor="let subjectdata of selectedsubject" [value]="subjectdata.subject_pk">{{
+                  subjectdata.subjects }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td> 
+          <td>
+              <mat-form-field>
+                <mat-label>Content Title</mat-label>
+                <input matInput type="text" formControlName="contenttitle">
+              </mat-form-field>
+  
+            </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Faculty Name</mat-label>
+              <mat-select disableRipple formControlName="facultyname">
+                <mat-option *ngFor="let facultydata of selectedfaculty" [value]="facultydata.add_faculty_pk">{{
+                  facultydata.name }}</mat-option>
+              </mat-select>
             </mat-form-field>
           </td>
-
           <td>
             <mat-form-field>
-                <mat-label>Upload Date</mat-label>
-                <input matInput formControlName="uploaddate"[matDatepicker]="picker" [(ngModel)]="selectedDate">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-               </mat-form-field>
-          </td> 
+              <mat-label>Date</mat-label>
+              <input matInput formControlName="dateofupload" id="dateofupload" [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+        
+
+            <label for="file">choose file</label>
+              <input formControlName="myFile" id="myFile" type="file" class="form-control" (change)="handleFileInput($event)">
+             
+          </td>
           <td>
             <mat-form-field>
               <mat-label>Upload By</mat-label>
               <input matInput type="text" formControlName="uploadby">
             </mat-form-field>
           </td>
-          <td>
-            <mat-form-field>
-              <mat-label>Select file</mat-label>
-              <input matInput type="text" formControlName="selectfile">
-            </mat-form-field>
-          </td>
-          
+         
+         
           <td>
             <button mat-icon-button (click)="removesubject(i)">
               <mat-icon>remove_circle</mat-icon>
             </button>
           </td>
         </tr>
-      </table>
-  
-      <!-- <button mat-raised-button  class="btn btn-success">Submit</button> -->
-      <button mat-raised-button color="primary"  (ngSubmit)="upload()"type="submit" >Upload</button>
-    </form>
-  
-  
-  </div>
-  
+      </table> -->
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+
+
+</div>

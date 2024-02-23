@@ -1,0 +1,51 @@
+<form [formGroup]="studentProfileForm">
+  <!-- <div class="form-group" style="margin-left: 27rem; border-radius: 58%;"   >
+          </div> -->
+
+
+    <mat-card-content class="password-card">
+      <div>
+        <h3>Class Details</h3>
+        <mat-form-field>
+          <mat-label> User ID</mat-label>
+          <input [readonly]="!editable" matInput formControlName="user_name">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input [readonly]="!editable" matInput formControlName="studentname">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Date of Birth</mat-label>
+          <input [readonly]="!editable" matInput formControlName="dob">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <input [readonly]="!editable" matInput formControlName="gender">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Batch Name</mat-label>
+          <input [readonly]="!editable" matInput formControlName="batch_name">
+
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Sub Stream Name</mat-label>
+          <input [readonly]="!editable" matInput formControlName="sub_stream_name">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Contact No</mat-label>
+          <input [readonly]="!editable" matInput formControlName="studentcontactno">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input [readonly]="!editable" matInput formControlName="studentemail">
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    <mat-card>
+      <form>

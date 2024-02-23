@@ -1,0 +1,164 @@
+<form [formGroup]="studentverifyForm"  >
+    <h1 mat-dialog-title>Verify</h1>
+    <div mat-dialog-content>
+        <h4>Student Details</h4>
+        <!-- <input [readonly]="!editable"  matInput formControlName="verificationstatus"   hidden > -->
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input [readonly]="!editable"  matInput formControlName="studentname"    >
+          </mat-form-field>
+        
+  
+          <mat-form-field>
+            <mat-label>Date Of Bith</mat-label>
+            <input [readonly]="!editable" matInput  formControlName="dob"    >
+          </mat-form-field>
+        
+         
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input [readonly]="!editable" matInput formControlName="address"    >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Contact No.</mat-label>
+            <input [readonly]="!editable" matInput formControlName="studentcontactno"     >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Email ID</mat-label>
+            <input [readonly]="!editable" matInput formControlName="studentemail"    >
+          </mat-form-field>
+        
+    
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <input [readonly]="!editable" matInput formControlName="gender"    >
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Previous Qualification</mat-label>
+            <input [readonly]="!editable" matInput formControlName="previousQualification"    >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>College Name/School Name</mat-label>
+            <input [readonly]="!editable" matInput formControlName="school_college_name"    >
+          </mat-form-field>
+      
+    
+    
+        <mat-form-field>
+          <mat-label>Student Aadhar NO</mat-label>
+          <input [readonly]="!editable" matInput formControlName="studentaadharno"    >
+        </mat-form-field> 
+      
+      <!-- Parents Details -->
+        
+      <div>
+      
+        <h4>Parents Details</h4>
+        <mat-form-field>
+            <mat-label>Parent's Name</mat-label>
+            <input [readonly]="!editable" matInput formControlName="parentName"    >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Occupation</mat-label>
+            <input [readonly]="!editable" matInput formControlName="occupation"    >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Income</mat-label>
+            <input [readonly]="!editable" matInput formControlName="income"  >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Email ID</mat-label>
+            <input [readonly]="!editable" matInput formControlName="parentemail"     >
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Contact No.</mat-label>
+            <input [readonly]="!editable" matInput formControlName="parentcontactNo"     >
+            <mat-hint align="end">Only digits allowed</mat-hint>
+          </mat-form-field>
+   
+  <div>
+    <h4>Cource Details</h4>
+
+    <mat-form-field>
+        <mat-label>Stream Name</mat-label>
+        <input [readonly]="!editable" matInput formControlName="stream_name"  >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>SubStream Name</mat-label>
+        <input [readonly]="!editable" matInput formControlName="substream_name"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Batch Name</mat-label>
+        <input [readonly]="!editable" matInput formControlName="batchName"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Date of Admission</mat-label>
+        <input [readonly]="!editable" matInput formControlName="dateofadmission"  >
+      </mat-form-field>
+
+      </div>
+      
+      <div>
+        <h4>Fees Details</h4>
+      <mat-form-field>
+        <mat-label>Total Fees Of Cource</mat-label>
+        <input [readonly]="!editable" matInput formControlName="totalFees"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Discount</mat-label>
+        <input [readonly]="!editable" matInput formControlName="discount"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fees Pre GST</mat-label>
+        <input [readonly]="!editable" matInput formControlName="feeswithoutgst"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fees Under GST</mat-label>
+        <input [readonly]="!editable" matInput formControlName="feeswithgst"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Payable Amount</mat-label>
+        <input [readonly]="!editable" matInput formControlName="payableamount"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Paying Amount</mat-label>
+        <input [readonly]="!editable" matInput formControlName="Payingamount"  >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Payment Type</mat-label>
+        <input [readonly]="!editable" matInput formControlName="paymentType"  >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Payment Mode</mat-label>
+        <input [readonly]="!editable" matInput formControlName="paymentMode"  >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Payment Via</mat-label>
+        <input [readonly]="!editable" matInput formControlName="paymentvia"  >
+      </mat-form-field>
+
+      
+
+
+
+  </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit"  [disabled]="disblebtn" (click)="generate_student_idpass()" color="primary">Generate Student ID Password</button>
+        <button mat-raised-button type="submit" (click)="generate_parents_idpass()" color="accent">Generate Parents ID Password</button>
+      <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+      <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+    </div>
+    </form>

@@ -36,8 +36,6 @@ export class InquiryformpopupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr:ToastrService
     ) {
-
-
   }
 
   ngOnInit() {

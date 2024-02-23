@@ -43,6 +43,7 @@ export class AddsubjectpopComponent implements OnInit {
       console.log("fail")
     }
   }
+  
   get subjects(): FormArray{
     return <FormArray> this.subjectForm.get('subjects')
   }

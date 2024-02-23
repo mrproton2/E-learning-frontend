@@ -41,6 +41,7 @@ export class AddstreamComponent implements OnInit {
   }
 
   Openpopup(data: any, title: any, type: any, component: any) {
+    debugger
     var _popup = this.dialog.open(component, {
       disableClose: true,
       width: '30%',
@@ -62,9 +63,9 @@ export class AddstreamComponent implements OnInit {
   }
 
   showstream() {
+    debugger
     this.service.getstream("data/getstream").subscribe(Streamnames => {
       this.dataSource = Streamnames;
-      debugger
       console.log(this.dataSource)
       this.dataSource = new MatTableDataSource<substream>(this.dataSource);
       this.dataSource.paginator = this.paginatior;
@@ -82,6 +83,7 @@ export class AddstreamComponent implements OnInit {
   }
 
   editstream(data: any, title: any, type: any) {
+  
     if (confirm('Are you sure??')) {
       debugger
       this.Openpopup(data, title, type, AddstreampopComponent)

@@ -4,57 +4,57 @@
     <h4>Student Details</h4>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="studentname" required>
+        <input matInput formControlName="studentname"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Date of Birth</mat-label>
-        <input matInput [matDatepicker]="dobPicker" formControlName="dob" required>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob"    >
         <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
         <mat-datepicker #dobPicker></mat-datepicker>
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Address</mat-label>
-        <input matInput formControlName="address" required>
+        <input matInput formControlName="address"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Contact No.</mat-label>
-        <input matInput formControlName="contactNo" required pattern="[0-9]*">
-        <mat-hint align="end" >Only digits allowed</mat-hint>
+        <input matInput formControlName="studentcontactno"     >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Email ID</mat-label>
-        <input matInput formControlName="email" required>
+        <input matInput formControlName="studentemail"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender" required>
+        <mat-select formControlName="gender"    >
           <mat-option value={{tabledata.gender}}>{{tabledata.gender}}</mat-option>
+
         </mat-select>
-      </mat-form-field>
-    
-      <!-- <mat-form-field>
-        <mat-label>Course</mat-label>
-        <input matInput formControlName="course" required>
-      </mat-form-field> -->
-    
+        </mat-form-field>
+      
+      
       <mat-form-field>
         <mat-label>Previous Qualification</mat-label>
-        <input matInput formControlName="previousQualification" required>
+        <input matInput formControlName="previousQualification"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>College Name/School Name</mat-label>
-        <input matInput formControlName="school_college_name" required>
+        <input matInput formControlName="school_college_name"    >
       </mat-form-field>
     </div>
 
 
-
+    <mat-form-field>
+      <mat-label>Student Aadhar NO</mat-label>
+      <input matInput formControlName="studentaadharno"    >
+    </mat-form-field> 
+  
   <!-- Parents Details -->
     
   <div>
@@ -62,28 +62,28 @@
     <h4>Parents Details</h4>
     <mat-form-field>
         <mat-label>Parent's Name</mat-label>
-        <input matInput formControlName="parentName" required>
+        <input matInput formControlName="parentName"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Occupation</mat-label>
-        <input matInput formControlName="occupation" required>
+        <input matInput formControlName="occupation"    >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Income</mat-label>
-        <input matInput formControlName="income" required pattern="[0-9]*">
-        <mat-hint align="end">Only digits allowed</mat-hint>
+        <input matInput formControlName="income"     >
+       
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Email ID</mat-label>
-        <input matInput formControlName="parentemail" required >
+        <input matInput formControlName="parentemail"     >
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Contact No.</mat-label>
-        <input matInput formControlName="parentcontactNo" required pattern="[0-9]*">
+        <input matInput formControlName="parentcontactNo"     >
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
     
@@ -92,7 +92,7 @@
       <div *ngIf="showOTPVerification">
         <mat-form-field>
           <mat-label>OTP</mat-label>
-          <input matInput formControlName="otp" required>
+          <input matInput formControlName="otp"    >
         </mat-form-field>
         <!-- <button mat-raised-button color="primary" (click)="onOTPVerify()">Verify OTP</button> -->
       </div>
@@ -116,7 +116,7 @@
     
       <mat-form-field>
         <mat-label>SubStream Name</mat-label>
-        <mat-select formControlName="substream_name">
+        <mat-select formControlName="substream_name" (selectionChange)="batchSelect($event.value)">
           <mat-option *ngFor="let streamdatas of selectedstream" [value]="streamdatas.addsubstream_pk">{{ streamdatas.sub_stream_name }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -124,9 +124,11 @@
     
       <mat-form-field>
         <mat-label>Batch Name</mat-label>
-        <input matInput formControlName="batchName" required>
+        <mat-select formControlName="batchName">
+          <mat-option *ngFor="let substreamdatas of selectedsubstream" [value]="substreamdatas.addbatch_pk">{{ substreamdatas.batch_name }}</mat-option>
+        </mat-select>
       </mat-form-field>
-   
+
     
 </div>
     <!-- Add other stream selection fields here -->
@@ -135,28 +137,28 @@
     <h4>Fees Structure</h4>
     <mat-form-field>
         <mat-label>Total Fees</mat-label>
-        <input matInput formControlName="totalFees" required pattern="[0-9]*">
+        <input matInput formControlName="totalFees"    >
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
     
       <mat-form-field>
         <mat-label>Discount (%)</mat-label>
-        <input matInput formControlName="discount" required>
+        <input matInput formControlName="discount" (keyup)="Calculation()">
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Fees without GST</mat-label>
-        <input matInput formControlName="feeswithoutgst" required pattern="[0-9]*">
+        <mat-label>Fees Pre GST</mat-label>
+        <input matInput formControlName="feeswithoutgst"     >
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>GST</mat-label>
-        <input matInput formControlName="gst" required>
+        <input matInput formControlName="gst"    >
       </mat-form-field>
     
       <mat-form-field>
-        <mat-label>Fees Including GST</mat-label>
-        <input matInput formControlName="feeswithgst" required pattern="[0-9]*">
+        <mat-label>Fees Under GST</mat-label>
+        <input matInput formControlName="feeswithgst"     >
         <mat-hint align="end">Only digits allowed</mat-hint>
       </mat-form-field>
     <!-- Add other fees structure fields here -->
@@ -168,125 +170,143 @@
   <mat-radio-group formControlName="paymentType">
     <mat-radio-button value="fullPayment">Full Payment</mat-radio-button>
     <mat-radio-button value="installmentMode">Installment Mode</mat-radio-button>
+    <div *ngIf="admissionForm.get('paymentType')?.value === 'fullPayment' || admissionForm.get('paymentType')?.value === 'installmentMode'">
+      <div *ngIf="admissionForm.get('paymentType')?.value === 'installmentMode'">
+       <div>
+         <mat-form-field>
+             <mat-label>Number of Installment </mat-label>
+                 <mat-select formControlName="numberOfInstallments" >
+               <!-- <mat-option value="1st">1 Installment</mat-option> -->
+               <mat-option value="1st">1 Installments</mat-option>
+               <!-- <mat-option value="3rd">3 Installments</mat-option> -->
+             </mat-select>
+           </mat-form-field>
+         </div>
+          <div *ngIf="admissionForm.get('numberOfInstallments').value === '1st'">
+             <mat-form-field>
+               <mat-label>Payable Amount</mat-label>
+               <input matInput formControlName="payableamount"       >
+               <mat-hint align="end">Only digits allowed</mat-hint>
+             </mat-form-field>
+ 
+             <mat-form-field>
+               <mat-label>Paying Amount</mat-label>
+               <input matInput formControlName="firstinstallment" (keyup)="installmentCal()">
+               <mat-hint align="end">Only digits allowed</mat-hint>
+             </mat-form-field>
+             <mat-form-field>
+               <mat-label>2nd Installment Amount</mat-label>
+               <input matInput formControlName="installmentamount"     >
+               <mat-hint align="end">Only digits allowed</mat-hint>
+             </mat-form-field>
+             <mat-form-field>
+               <mat-label>2nd Installment Date</mat-label>
+               <input matInput [matDatepicker]="dobPicker" formControlName="installmentdate"    >
+               <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+               <mat-datepicker #dobPicker></mat-datepicker>
+             </mat-form-field>
+         
+           </div>
+           <!-- <div *ngIf="admissionForm.get('numberOfInstallments').value === '3rd'">
+               <mat-form-field>
+                 <mat-label>PayableAmount</mat-label>
+                 <input matInput formControlName="payableamount"       >
+                 <mat-hint align="end">Only digits allowed</mat-hint>
+               </mat-form-field>
+ 
+               <mat-form-field>
+                 <mat-label>Paying Amount</mat-label>
+                 <input matInput formControlName="payingamount"       >
+                 <mat-hint align="end">Only digits allowed</mat-hint>
+               </mat-form-field>
+ 
+               <mat-form-field>
+                 <mat-label>2nd Installment Amount</mat-label>
+                 <input matInput formControlName="secondinstallmenamount"       >
+                 <mat-hint align="end">Only digits allowed</mat-hint>
+               </mat-form-field>
+               <mat-form-field>
+                 <mat-label>2nd Installment Date</mat-label>
+                 <input matInput [matDatepicker]="dobPicker" formControlName="secondinstallmentdate"    >
+                 <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                 <mat-datepicker #dobPicker></mat-datepicker>
+               </mat-form-field>
+               
+               <mat-form-field>
+                 <mat-label>3rd Installment Amount</mat-label>
+                 <input matInput formControlName="thirdinstallmenamount"       >
+                 <mat-hint align="end">Only digits allowed</mat-hint>
+               </mat-form-field>
+ 
+ 
+               <mat-form-field>
+                 <mat-label>3rd Installment Date</mat-label>
+                 <input matInput [matDatepicker]="thirdinstallmentdatePicker" formControlName="thirdinstallmentdate"    >
+                 <mat-datepicker-toggle matSuffix [for]="thirdinstallmentdatePicker"></mat-datepicker-toggle>
+                 <mat-datepicker #thirdinstallmentdatePicker></mat-datepicker>
+               </mat-form-field>
+ 
+               
+           </div> -->
+ 
+ 
+         <div *ngIf="admissionForm.get('paymentMode')?.value === 'onlineMode'">
+        
+         </div>
+     
+         <div *ngIf="admissionForm.get('paymentMode')?.value === 'offlineMode'">
+         
+         </div>
+       </div>
+ 
+ 
+       
+     <mat-radio-group formControlName="paymentMode">
+       <mat-radio-button value="onlineMode">Online Mode</mat-radio-button>
+       <mat-radio-button value="offlineMode">Offline Mode</mat-radio-button>
+     </mat-radio-group>
+ 
+     <div *ngIf="admissionForm.get('paymentMode')?.value === 'onlineMode'">
+       <mat-form-field>
+         <mat-label>Amount</mat-label>
+         <input matInput formControlName="Payingamount" >
+         <mat-hint align="end">Only digits allowed</mat-hint>
+       </mat-form-field>
+      
     
+ 
+       <mat-radio-group formControlName="paymentvia">
+         <mat-radio-button value="upi">UPI</mat-radio-button>
+         <mat-radio-button value="card">Card</mat-radio-button>
+         <mat-radio-button value="banking">Banking</mat-radio-button>
+       </mat-radio-group>
+    
+     </div>
+ 
+     <div *ngIf="admissionForm.get('paymentMode')?.value === 'offlineMode'">
+ 
+      
+       <mat-form-field>
+         <mat-label>Amount</mat-label>
+         <input matInput formControlName="payableamount"     >
+         <mat-hint align="end">Only digits allowed</mat-hint>
+       </mat-form-field>
+ 
+       <mat-form-field>
+         <mat-label>Collected By</mat-label>
+         <input matInput formControlName="offlineCollectedBy"    >
+       </mat-form-field>
+     </div>
+   </div>
+
   </mat-radio-group>
 
-  <div *ngIf="admissionForm.get('paymentType')?.value === 'fullPayment' || admissionForm.get('paymentType')?.value === 'installmentMode'">
-     <div *ngIf="admissionForm.get('paymentType')?.value === 'installmentMode'">
-      <div>
-        <mat-form-field>
-            <mat-label>Number of Installment </mat-label>
-                <mat-select formControlName="numberOfInstallments" >
-              <!-- <mat-option value="1st">1 Installment</mat-option> -->
-              <mat-option value="2nd">2 Installments</mat-option>
-              <mat-option value="3rd">3 Installments</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-         <div *ngIf="admissionForm.get('numberOfInstallments').value === '2nd'">
-            <mat-form-field>
-              <mat-label>Amount</mat-label>
-              <input matInput formControlName="amount" required pattern="[0-9]*">
-              <mat-hint align="end">Only digits allowed</mat-hint>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>2nd Installment Amount</mat-label>
-              <input matInput formControlName="secondinstallmenamount" required pattern="[0-9]*">
-              <mat-hint align="end">Only digits allowed</mat-hint>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>2nd Installment Date</mat-label>
-              <input matInput [matDatepicker]="dobPicker" formControlName="secondinstallmentdate" required>
-              <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-              <mat-datepicker #dobPicker></mat-datepicker>
-            </mat-form-field>
-        
-          </div>
-          <div *ngIf="admissionForm.get('numberOfInstallments').value === '3rd'">
-              <mat-form-field>
-                <mat-label>Amount</mat-label>
-                <input matInput formControlName="amount" required pattern="[0-9]*">
-                <mat-hint align="end">Only digits allowed</mat-hint>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>2nd Installment Amount</mat-label>
-                <input matInput formControlName="secondinstallmenamount" required pattern="[0-9]*">
-                <mat-hint align="end">Only digits allowed</mat-hint>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>2nd Installment Date</mat-label>
-                <input matInput [matDatepicker]="dobPicker" formControlName="secondinstallmentdate" required>
-                <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-                <mat-datepicker #dobPicker></mat-datepicker>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-label>3rd Installment Amount</mat-label>
-                <input matInput formControlName="thirdinstallmenamount" required pattern="[0-9]*">
-                <mat-hint align="end">Only digits allowed</mat-hint>
-              </mat-form-field>
-
-
-              <mat-form-field>
-                <mat-label>3rd Installment Date</mat-label>
-                <input matInput [matDatepicker]="thirdinstallmentdatePicker" formControlName="thirdinstallmentdate" required>
-                <mat-datepicker-toggle matSuffix [for]="thirdinstallmentdatePicker"></mat-datepicker-toggle>
-                <mat-datepicker #thirdinstallmentdatePicker></mat-datepicker>
-              </mat-form-field>
-
-              
-          </div>
-
-
-        <div *ngIf="admissionForm.get('paymentMode')?.value === 'onlineMode'">
-       
-        </div>
-    
-        <div *ngIf="admissionForm.get('paymentMode')?.value === 'offlineMode'">
-        
-        </div>
-      </div>
-
-
-      
-    <mat-radio-group formControlName="paymentMode">
-      <mat-radio-button value="onlineMode">Online Mode</mat-radio-button>
-      <mat-radio-button value="offlineMode">Offline Mode</mat-radio-button>
-    </mat-radio-group>
-
-    <div *ngIf="admissionForm.get('paymentMode')?.value === 'onlineMode'">
-      <mat-form-field>
-        <mat-label>Amount</mat-label>
-        <input matInput formControlName="onlineAmount" required pattern="[0-9]*">
-        <mat-hint align="end">Only digits allowed</mat-hint>
-      </mat-form-field>
-     
-      <mat-radio-button >UPI</mat-radio-button>
-      <mat-radio-button >Card</mat-radio-button>
-      <mat-radio-button >Banking</mat-radio-button>
-   
-    </div>
-
-    <div *ngIf="admissionForm.get('paymentMode')?.value === 'offlineMode'">
-
-     
-      <mat-form-field>
-        <mat-label>Amount</mat-label>
-        <input matInput formControlName="offlineAmount" required pattern="[0-9]*">
-        <mat-hint align="end">Only digits allowed</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Collected By</mat-label>
-        <input matInput formControlName="offlineCollectedBy" required>
-      </mat-form-field>
-    </div>
-  </div>
+  
 
   
 </div>
 
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="admissionForm.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>
   

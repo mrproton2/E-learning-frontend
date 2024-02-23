@@ -20,7 +20,7 @@ export class MasterService {
       { code: 'c2', name: 'Green' },
       { code: 'c3', name: 'Yellow' },
       { code: 'c4', name: 'White' }
-      
+
     ]
   }
 
@@ -52,7 +52,7 @@ export class MasterService {
   }
 
 
-//AddStream
+  //AddStream
 
   addstream(data: any, url: any) {
     url = this.baseurl + url;
@@ -62,110 +62,192 @@ export class MasterService {
     url = this.baseurl + url;
     return this.http.get<any>(url);
   }
-  deleteStream(data: any, url: any){
+  deleteStream(data: any, url: any) {
     debugger
     url = this.baseurl + url;
     console.log(url)
-    return this.http.delete(url+data);
+    return this.http.delete(url + data);
   }
 
-  updatestream(pk:any,data: any, url: any) {
+  updatestream(pk: any, data: any, url: any) {
     url = this.baseurl + url;
     return this.http.put(url, data);
   }
-  
-//AddSubstream
 
-addSubStream(data: any, url: any) {
+  //AddSubstream
+
+  addSubStream(data: any, url: any) {
+    debugger
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+  getSubStream(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+  deleteSubStream(data: any, url: any) {
+    url = this.baseurl + url;
+    console.log(url)
+    return this.http.delete(url + data);
+  }
+
+  updateSubStream(pk: any, data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.put(url, data);
+  }
+
+  getStream(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+
+  }
+
+
+  //InquiryForm
+
+  addInquiry(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+  getInquiryFormData(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+
+  updateinquiryform(pk: any, data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.put(url, data);
+  }
+
+  //AddSubject services
+
+  addsubject(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+  getSubject(url: any): Observable<any[]> {
+    debugger
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+  // AddBatch servivces
+  addbatch(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+
+  getBatch(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+  deletebatch(data: any, url: any) {
+    url = this.baseurl + url;
+    console.log(url)
+    return this.http.delete(url + data);
+  }
+
+  //AddFacultyOrStaff
+
+
+  addfaculty(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+  getfaculty(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+  getfacultyidpass(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+  generateidpassfaculty(data: any, url: any) {
+    debugger
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+
+
+  //classprofile
+
+
+  // addclassprofile(data: any, url: any) {
+  //   debugger
+  //   url = this.baseurl + url;
+  //   return this.http.post(url, data);
+  // }
+  getClassProfile(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+
+  //Admission Related Services
+
+  getAdmissionFormDetails(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+
+  generateidpass(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+
+  //schedule Related Services
+
+  postschedule(data: any, url: any) {
+    url = this.baseurl + url;
+    return this.http.post(url, data);
+  }
+
+
+
+  //attendance Realated Services
+  getstudenddata(url: any): Observable<any[]> {
+    url = this.baseurl + url;
+    return this.http.get<any>(url);
+  }
+
+
+// Login Related Services
+
+login(data: any, url: any) {
+ 
+  url = this.baseurl + url;
+  return this.http.post(url, data);
+}
+
+loginget(url: any): Observable<any[]> {
   debugger
   url = this.baseurl + url;
+  return this.http.get<any>(url);
+}
+
+//Common Servive
+Post(data: any, url: any) {
+  url = this.baseurl + url;
   return this.http.post(url, data);
 }
-getSubStream(url: any): Observable<any[]> {
+Get(url: any): Observable<any[]> {
+  debugger
   url = this.baseurl + url;
   return this.http.get<any>(url);
 }
-deleteSubStream(data: any, url: any){
+Delete(data: any, url: any) {
   url = this.baseurl + url;
   console.log(url)
-  return this.http.delete(url+data);
+  return this.http.delete(url + data);
 }
 
-updateSubStream(pk:any,data: any, url: any) {
+Put(pk: any, data: any, url: any) {
   url = this.baseurl + url;
   return this.http.put(url, data);
 }
 
-getStream(url: any): Observable<any[]> {
-  url = this.baseurl + url;
-  return this.http.get<any>(url);
-
-}
-
-
-//InquiryForm
-
-addInquiry(data: any, url: any) {
-  url = this.baseurl + url;
-  return this.http.post(url, data);
-}
-getInquiryFormData(url: any): Observable<any[]> {
-  url = this.baseurl + url;
-  return this.http.get<any>(url);
-}
-
-
-updateinquiryform(pk:any,data: any, url: any) {
-  url = this.baseurl + url;
-  return this.http.put(url, data);
-}
-
-//AddSubject services
-
-addsubject(data: any, url: any) {
-  url = this.baseurl + url;
-  return this.http.post(url, data);
-}
-getSubject(url: any): Observable<any[]> {
-  url = this.baseurl + url;
-  return this.http.get<any>(url);
-}
-
-// AddBatch servivces
-addbatch(data: any, url: any) {
-  url = this.baseurl + url;
-  return this.http.post(url, data);
-}
-
-getBatch(url: any): Observable<any[]> {
-  url = this.baseurl + url;
-  return this.http.get<any>(url);
-}
-deletebatch(data: any, url: any){
-  url = this.baseurl + url;
-  console.log(url)
-  return this.http.delete(url+data);
-}
-
-//AddFacultyOrStaff
-
-
-addfaculty(data: any, url: any) {
-  url = this.baseurl + url;
-  return this.http.post(url, data);
-}
-
-//classprofile
-
-
-// addclassprofile(data: any, url: any) {
-//   debugger
-//   url = this.baseurl + url;
-//   return this.http.post(url, data);
-// }
-getClassProfile(url: any): Observable<any[]> {
-  url = this.baseurl + url;
-  return this.http.get<any>(url);
-}
 
 }

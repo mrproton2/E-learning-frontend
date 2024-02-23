@@ -10,7 +10,7 @@ import { PopupComponent } from 'src/app/component/popup/popup.component';
 import { UserdetailComponent } from 'src/app/component/userdetail/userdetail.component';
 import { AddstreampopComponent } from '../addstreampop/addstreampop.component';
 import { AddbatchpopupComponent } from '../addbatchpopup/addbatchpopup.component';
-import { ClassdashboardpopupComponent } from '../classdashboardpopup/classdashboardpopup.component';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -53,7 +53,6 @@ export class ClassdashboardComponent implements OnInit{
 
 
   updateprofile(){
-    this.Openpopup(0, 'Add Stream',ClassdashboardpopupComponent);
   }
 
   Openpopup(code: any, title: any,component:any) {

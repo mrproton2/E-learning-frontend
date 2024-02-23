@@ -6,6 +6,8 @@
     <span class="example-spacer"></span>
     
     <button routerLink="facultyprofile" mat-raised-button color="accent">Profile</button>
+    <button mat-flat-button color="accent" (click)="logout()">Logout</button>
+
 </mat-toolbar>
 <mat-drawer-container autosize>
     <mat-drawer #drawer opened="true" mode="side" position="start">

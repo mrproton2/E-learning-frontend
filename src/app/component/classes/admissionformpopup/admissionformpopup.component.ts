@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { map, pipe } from 'rxjs';
 import { MasterService } from 'src/app/service/master.service';
 
@@ -19,14 +20,17 @@ export class AdmissionformpopupComponent implements OnInit {
   streamdata: any[];
   substreamdata: any[];
   selectedstream: any;
+  selectedsubstream: any;
   tabledata: any;
-  batchdataSource:any;
+  batchdataSource: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<AdmissionformpopupComponent>,
     private formBuilder: FormBuilder,
     private service: MasterService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr:ToastrService
   ) { }
 
   ngOnInit() {
@@ -37,76 +41,42 @@ export class AdmissionformpopupComponent implements OnInit {
       studentname: ['', Validators.required],
       dob: ['', Validators.required],
       address: ['', Validators.required],
-      contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      email: ['', Validators.required],
+      studentcontactno: ['', Validators.required],
+      studentemail: ['', Validators.required],
       gender: ['', Validators.required],
 
       previousQualification: ['', Validators.required],
       school_college_name: ['', Validators.required],
-
+      studentaadharno: ['', Validators.required],
       // Add other student details form controls and validations here
 
       // Parents Details
       parentName: ['', Validators.required],
       occupation: ['', Validators.required],
-      income: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      income: ['', Validators.required],
       parentemail: ['', Validators.required,],
-      parentcontactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      otp: [''],
-
+      parentcontactNo: ['', Validators.required],
       stream_name: ['', Validators.required],
       substream_name: ['', Validators.required],
       batchName: ['', Validators.required],
-      dateofadmission: ['', Validators.required],
-
-      totalFees: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      dateofadmission: [new Date(), Validators.required],
+      //Fess related
+      totalFees: ['', Validators.required],
       discount: ['', Validators.required],
-      gst: ['', Validators.required],
-      feeswithoutgst: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      feeswithgst: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-
-
-
-
-
-
-
-
+      gst: [{ value: '18', disabled: true }, Validators.required],
+      feeswithoutgst: ['', Validators.required],
+      feeswithgst: ['', Validators.required],
+      payableamount: ['', Validators.required],
+      Payingamount: [''],
       paymentType: [''],
-
-
-
-      fullPayment: [false],
-      installmentMode: [false],
-      numberOfInstallments: ['1'],
-      amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      secondinstallmenamount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      secondinstallmentdate: ['', Validators.required],
-      thirdinstallmenamount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      thirdinstallmentdate: ['', Validators.required],
-
-
-
+      numberOfInstallments: [''],
+      installmentamount: [''],
+      installmentdate: ['',],
+      paymentvia: [''],
       paymentMode: [''],
-      onlineMode: [false],
-      offlineMode: [false],
-      onlineAmount: [''],
-      upi: [''],
-      card: [''],
-      banking: [''],
-      offlineAmount: [''],
       offlineCollectedBy: [''],
-
-
+      firstinstallment: [''],
     });
-
-
-
-
-
-
-
-
 
     this.tabledata = this.data
     if (this.tabledata.addinquiry_pk > 0) {
@@ -117,102 +87,108 @@ export class AdmissionformpopupComponent implements OnInit {
         studentname: this.tabledata.studentname,
         date: this.tabledata.date,
         address: this.tabledata.address,
-        contactNo: this.tabledata.contact_no,
-        email: this.tabledata.email_id,
+        studentcontactno: this.tabledata.contact_no,
+        studentemail: this.tabledata.email_id,
         gender: this.tabledata.gender,
         dob: this.tabledata.date_of_birth,
         previousQualification: this.tabledata.previous_qualification,
         school_college_name: this.tabledata.school_college_name,
         stream_name: this.tabledata.stream_name,
         substream_name: this.tabledata.substream_name,
-
       })
-      console.log(this.tabledata)
+
     }
 
-
-    this.getstreamname()
-    this.getsubstreamname();
     this.getInquiryForm();
+    this.getstreamname()
+    this.getsubstreamname(); 
     this.GetBatch();
 
 
 
-    // this.admissionForm.get('inquirydataserach').valueChanges.subscribe(response=>{
-    //   console.log('data is',response)
-    //   this.filterdata(response);
-    // })
+  
 
   }
 
 
+  
   onSubmit() {
     if (this.admissionForm.valid) {
-
-      console.log(this.admissionForm.value);
+      debugger
+      this.service.addstream(this.admissionForm.value, "Admission/postAdmissionForm").subscribe(result => {
+        this.data = result;
+        this.toastr.success('Admission Suceessfully')
+       // this.closepopup();
+      })
+    } else {
+      this.toastr.warning('Please Check Form again!')
     }
-  }
-
-
-
-  onVerify() {
-
-    this.showOTPVerification = true;
-  }
-
-  onOTPVerify() {
-    this.showOTPVerification = false;
-  }
-  onSelectionChange() {
 
   }
+
+
 
   getInquiryForm() {
-    debugger
     this.service.getInquiryFormData("InquiryForm/InquiryFormData").subscribe(inquiryformdata => {
       this.inquiryFormdata = inquiryformdata;
-    
       this.filteredOptions = inquiryformdata;
-
     });
   }
 
 
   getstreamname() {
     this.service.getstream("data/getstream").subscribe(Streamnames => {
-      debugger
       this.streamdata = Streamnames;
-    
     });
   }
 
   getsubstreamname() {
-    debugger
     this.service.getSubStream("addSubStream/getsubstream").subscribe(subStreamnames => {
       this.substreamdata = subStreamnames;
-      console.log(this.substreamdata )
-
     });
   }
-
 
   GetBatch() {
     this.service.getBatch("Batch/BatchData").subscribe(batchdata => {
       this.batchdataSource = batchdata;
-    //  console.log(this.batchdataSource )
-      
     });
   }
 
   onSelect(s_pk: number) {
-    debugger
     this.selectedstream = this.substreamdata.filter((item) => item.stream_pk == s_pk);
   }
 
   batchSelect(s_pk: number) {
-    debugger
-    this.selectedstream = this.substreamdata.filter((item) => item.stream_pk == s_pk);
+    this.selectedsubstream = this.batchdataSource.filter((item) => item.substream_pk == s_pk);
+    this.admissionForm.patchValue({
+      totalFees: this.selectedstream[0].fees
+    })
   }
 
+  Calculation() {
+    const discount = (this.admissionForm.get('discount').value) / 100;
+    const totalfee = this.admissionForm.get('totalFees').value;
+    var totalValue = totalfee - (totalfee * discount)
+    const gstAmount = (totalValue * 18) / 100;
+    const totalAmountundergst = totalValue + gstAmount;
+    this.admissionForm.patchValue({
+      feeswithoutgst: totalValue,
+      feeswithgst: totalAmountundergst,
+      payableamount: totalAmountundergst,
+      Payingamount: totalAmountundergst,
+      
+
+    })
+
+  }
+  installmentCal() {
+    const TotalamountunderGst = this.admissionForm.get('payableamount').value;
+    const Payingamount = this.admissionForm.get('firstinstallment').value;
+    var installmentamt = TotalamountunderGst - Payingamount;
+    this.admissionForm.patchValue({
+      installmentamount: installmentamt,
+      Payingamount: Payingamount,
+    })
+  }
 
 }

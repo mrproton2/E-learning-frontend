@@ -17,54 +17,54 @@
         <h3>Class Details</h3>
         <mat-form-field>
             <mat-label> Class Name</mat-label>
-            <input matInput formControlName="classname" >
+            <input [readonly]="!editable" matInput formControlName="classname" >
           </mat-form-field>
         
           <mat-form-field>
             <mat-label>Date Of Establishment</mat-label>
-            <input matInput [matDatepicker]="dobPicker" formControlName="date_of_creation" >
+            <input [readonly]="!editable" matInput [matDatepicker]="dobPicker" formControlName="date_of_creation" >
             <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
             <mat-datepicker #dobPicker></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Solgan</mat-label>
-            <input matInput formControlName="slogan" >
+            <input [readonly]="!editable" matInput formControlName="slogan" >
           </mat-form-field>
     
             
       
           <mat-form-field>
             <mat-label>Branch Name</mat-label>
-            <input matInput formControlName="branchname" >
+            <input [readonly]="!editable" matInput formControlName="branchname" >
           </mat-form-field>
         
           
           <mat-form-field>
             <mat-label>Address</mat-label>
-            <input matInput formControlName="address" >
+            <input [readonly]="!editable" matInput formControlName="address" >
           </mat-form-field>
         
           <mat-form-field>
             <mat-label>Contact No.</mat-label>
-            <input matInput formControlName="contact"  pattern="[0-9]*">
+            <input [readonly]="!editable" matInput formControlName="contact"  pattern="[0-9]*">
             <mat-hint align="end" >Only digits allowed</mat-hint>
           </mat-form-field>
         
           <mat-form-field>
             <mat-label>Email ID</mat-label>
-            <input matInput formControlName="email"  readonly>
+            <input [readonly]="!editable" matInput formControlName="email"  readonly>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Pan No</mat-label>
-            <input matInput formControlName="panno" >
+            <input [readonly]="!editable" matInput formControlName="panno" >
           </mat-form-field>
           <mat-form-field>
             <mat-label>Aadhar No</mat-label>
-            <input matInput formControlName="aadharno" >
+            <input [readonly]="!editable" matInput formControlName="aadharno" >
           </mat-form-field>
           <mat-form-field>
             <mat-label>GST NO</mat-label>
-            <input matInput formControlName="gstno" >
+            <input [readonly]="!editable" matInput formControlName="gstno" >
           </mat-form-field>
         
       

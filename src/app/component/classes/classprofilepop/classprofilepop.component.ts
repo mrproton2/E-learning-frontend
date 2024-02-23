@@ -50,7 +50,6 @@ export class ClassprofilepopComponent implements OnInit {
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       this.classLogo = reader.result;
-
       this.fileToUpload = e?.target?.files[0];
       console.log(this.fileToUpload)
     }

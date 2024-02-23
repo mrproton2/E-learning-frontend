@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>Type Of Employee</mat-label>
           <mat-select formControlName="employee" [(ngModel)]="selected" (ngModelChange)="onSelectionChange()">
         <mat-option value="faculty">Faculty</mat-option>
@@ -8,57 +8,52 @@
         <mat-option value="peon">Peon</mat-option>
         <mat-option value="batch">Batch</mat-option>
       </mat-select>
-    </mat-form-field>
-<button style="margin-left: 60%;" (click)="addcustomer()" mat-raised-button color="primary">view</button>
+    </mat-form-field> -->
   </mat-card-header>
   <mat-card-content>
 
   
 
-<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="srno">
-    <th mat-sort-header mat-header-cell *matHeaderCellDef> Sr-no</th>
-    <td mat-cell *matCellDef="let element">{{element.id}}</td>
-  </ng-container>
+      <ng-container matColumnDef="addbatch_pk">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>addstream_pk</th>
+        <td mat-cell *matCellDef="let element">{{element.addbatch_pk}} </td>
+      </ng-container>
+      <ng-container matColumnDef="srno">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Sr-no</th>
+        <td mat-cell *matCellDef="let element"> </td>
+      </ng-container>
+      <ng-container matColumnDef="batch_name">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Batch Name</th>
+        <td mat-cell *matCellDef="let element">{{element.batch_name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="creation_date">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Date of Creation</th>
+        <td mat-cell *matCellDef="let element">{{element.creation_date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="type">
-      <th mat-sort-header mat-header-cell *matHeaderCellDef>Type</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
-    </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action</th>
+        <td mat-cell *matCellDef="let element">
+    
+           <button mat-raised-button (click)="view(element)" color="primary">View</button> 
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
 
-    <!-- <ng-container matColumnDef="DOC">
-      <th mat-sort-header mat-header-cell *matHeaderCellDef> Date of Creation</th>
-      <td mat-cell *matCellDef="let element">{{element.email}}</td>
-    </ng-container> -->
-
-   
-    <ng-container matColumnDef="status">
-      <th mat-sort-header mat-header-cell *matHeaderCellDef> Status</th>
-      <td mat-cell *matCellDef="let element">{{element.status}}</td>
-    </ng-container>
-
-   <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action</th>
-      <td mat-cell *matCellDef="let element">
-
-          <button  mat-raised-button color="primary">Edit</button>
-          <button mat-raised-button color="warn">Delete</button>
-          <button  mat-raised-button color="primary">Detail</button>
-      </td>
-    </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
-
-</table>
+    </table>
 
 </mat-card-content>
 <br>
 <mat-card-footer>
 
-  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
 
 </mat-card-footer>
 </mat-card>  

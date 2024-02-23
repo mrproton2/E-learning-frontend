@@ -23,7 +23,7 @@ import { AddsubstreamComponent } from './component/classes/addsubstream/addsubst
 import { AddsubstreampopupComponent } from './component/classes/addsubstreampopup/addsubstreampopup.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { LoginComponent } from './login/login.component';
-import { Router, RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
@@ -34,7 +34,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRippleModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -65,7 +65,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddbatchComponent } from './component/classes/addbatch/addbatch.component';
 import { AddbatchpopupComponent } from './component/classes/addbatchpopup/addbatchpopup.component';
 import { ClassdefaultComponent } from './component/classes/classdefault/classdefault.component';
@@ -92,7 +91,6 @@ import { AddsubjectComponent } from './component/classes/addsubject/addsubject.c
 import { AddsubjectpopComponent } from './component/classes/addsubjectpop/addsubjectpop.component';
 import { AddfacultyetcComponent } from './component/classes/addfacultyetc/addfacultyetc.component';
 import { AddfacultyetcpopupComponent } from './component/classes/addfacultyetcpopup/addfacultyetcpopup.component';
-import { ClassdashboardpopupComponent } from './component/classes/classdashboardpopup/classdashboardpopup.component';
 import { ClassprofileComponent } from './component/classes/classprofile/classprofile.component';
 import { ClassprofilepopComponent } from './component/classes/classprofilepop/classprofilepop.component';
 import { AttendanceComponent } from './component/classes/attendance/attendance.component';
@@ -119,22 +117,41 @@ import { AttedanceInParentsComponent } from './component/parents/attedance-in-pa
 import { ScheduleInParentsComponent } from './component/parents/schedule-in-parents/schedule-in-parents.component';
 import { ResultInParentsComponent } from './component/parents/result-in-parents/result-in-parents.component';
 import { FeesstatusComponent } from './component/parents/feesstatus/feesstatus.component';
-import { NotificationComponent } from './component/parents/notification/notification.component';
+
 import { FeepaymentInParentsComponent } from './component/parents/feepayment-in-parents/feepayment-in-parents.component';
 import { StudentresultComponent } from './component/student/studentresult/studentresult.component';
 import { UploadmarksComponent } from './component/classes/uploadmarks/uploadmarks.component';
 import { UploadmarkspopupComponent } from './component/classes/uploadmarkspopup/uploadmarkspopup.component';
 import { StudentvideolecturepanelComponent } from './component/student/studentvideolecturepanel/studentvideolecturepanel.component';
-import {VgApiService, VgCoreModule} from '@videogular/ngx-videogular/core';
-import {VgControlsModule} from '@videogular/ngx-videogular/controls';
-import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
-import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
-import {VgStreamingModule } from '@videogular/ngx-videogular/streaming';
-import { StudentlecturepanelComponent } from './component/student/studentlecturepanel/studentlecturepanel.component'
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { StudentlecturepanelComponent } from './component/student/studentlecturepanel/studentlecturepanel.component';
 import { ToastrModule } from 'ngx-toastr';
 
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { StudentverifypopComponent } from './component/classes/studentverifypop/studentverifypop.component';
+import { AddsubjectviewpopComponent } from './component/classes/addsubjectviewpop/addsubjectviewpop.component';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { AddstaffpopupComponent } from './component/classes/addstaffpopup/addstaffpopup.component';
+import { StudentprofileComponent } from './component/student/studentprofile/studentprofile.component';
+import { ResetstudnetpasswordComponent } from './component/student/resetstudnetpassword/resetstudnetpassword.component';
+import { DatePipe } from '@angular/common';
+import { StudentscheduleComponent } from './component/student/studentschedule/studentschedule.component';
+import { AttendancesubjectpopComponent } from './component/classes/attendancesubjectpop/attendancesubjectpop.component';
 
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -167,68 +184,67 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ParentsdashboardComponent,
     ParentsdefaultComponent,
     AdmissionformComponent,
-     InquiryformComponent,
-     InquiryformpopupComponent,
-     AdmissionformpopupComponent,
-     GenerateidpasswordComponent,
-     InvoicereportComponent,
-     ScheduleComponent,
-     SchedulepopupComponent,
-     AddsubjectComponent,
-     AddsubjectpopComponent,
-     AddfacultyetcComponent,
-     AddfacultyetcpopupComponent,
-     ClassdashboardpopupComponent,
-    
-     ClassprofileComponent,
-     ClassprofilepopComponent,
-     AttendanceComponent,
-     AttendancepopupComponent,
-     SalaryComponent,
-     AddtestpopupComponent,
-     UploadmaterialComponent,
-     UploadmaterialpopupComponent,
-     FacultyprofileComponent,
-     StudentmyclassesComponent,
-     FeespaymentComponent,
-     FeespaymentpopComponent,
-     SalarystatusComponent,
-     RaiseddoubtComponent,
-     RaiseddoubtpopComponent,
-     UploadmaterialfacultyComponent,
-     UploadmaterialfacultypopupComponent,
-     FacultyattendanceComponent,
-     StudentattendanceComponent,
-     StudentaskdoubtComponent,
-     StudenttrackdoubtComponent,
-     AttedanceInParentsComponent,
-     ScheduleInParentsComponent,
-     ResultInParentsComponent,
-     FeesstatusComponent,
-    
-     NotificationComponent,
-     FeepaymentInParentsComponent,
-     StudentresultComponent,
-     UploadmarksComponent,
-     UploadmarkspopupComponent,
-     StudentvideolecturepanelComponent,
-     StudentlecturepanelComponent,
-   
-    
-   
-   
-  
-    
-    
+    InquiryformComponent,
+    InquiryformpopupComponent,
+    AdmissionformpopupComponent,
+    GenerateidpasswordComponent,
+    InvoicereportComponent,
+    ScheduleComponent,
+    SchedulepopupComponent,
+    AddsubjectComponent,
+    AddsubjectpopComponent,
+    AddfacultyetcComponent,
+    AddfacultyetcpopupComponent,
+    ClassprofileComponent,
+    ClassprofilepopComponent,
+    AttendanceComponent,
+    AttendancepopupComponent,
+    SalaryComponent,
+    AddtestpopupComponent,
+    UploadmaterialComponent,
+    UploadmaterialpopupComponent,
+    FacultyprofileComponent,
+    StudentmyclassesComponent,
+    FeespaymentComponent,
+    FeespaymentpopComponent,
+    SalarystatusComponent,
+    RaiseddoubtComponent,
+    RaiseddoubtpopComponent,
+    UploadmaterialfacultyComponent,
+    UploadmaterialfacultypopupComponent,
+    FacultyattendanceComponent,
+    StudentattendanceComponent,
+    StudentaskdoubtComponent,
+    StudenttrackdoubtComponent,
+    AttedanceInParentsComponent,
+    ScheduleInParentsComponent,
+    ResultInParentsComponent,
+    FeesstatusComponent,
+    FeepaymentInParentsComponent,
+    StudentresultComponent,
+    UploadmarksComponent,
+    UploadmarkspopupComponent,
+    StudentvideolecturepanelComponent,
+    StudentlecturepanelComponent,
+    StudentverifypopComponent,
+    AddsubjectviewpopComponent,
+    AddstaffpopupComponent,
+    StudentprofileComponent,
+    ResetstudnetpasswordComponent,
+    StudentscheduleComponent,
+    AttendancesubjectpopComponent,
+ 
   ],
   imports: [
+    DatePipe,
+    NgxMatTimepickerModule,
     MatNativeDateModule,
     CommonModule,
     ReactiveFormsModule,
-    MatBottomSheetModule, 
-    MatProgressBarModule, 
+    MatBottomSheetModule,
+    MatProgressBarModule,
     MatStepperModule,
-    MatSlideToggleModule , 
+    MatSlideToggleModule,
     MatSliderModule,
     MatDialogModule,
     FormsModule,
@@ -295,16 +311,16 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    ToastrModule.forRoot({
-      
-    }),
+    ToastrModule.forRoot({}),
     MatFormFieldModule,
     NgxMaterialTimepickerModule
-    
 
   ],
-  providers: [],
+  providers: [DatePipe,
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+    
+  ],
   bootstrap: [AppComponent],
-  
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-studentdefault',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./studentdefault.component.css']
 })
 export class StudentdefaultComponent {
+
+  constructor(private toastr: ToastrService,
+    private router: Router){
+  
+  }
+  
+    logout(){
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+      this.toastr.success("Successfully logout!!")
+    }
+  
 
 }

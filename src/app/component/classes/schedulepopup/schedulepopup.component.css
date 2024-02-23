@@ -16,3 +16,15 @@ mat-form-field{
   margin: 2px;
 }
 
+/* .timepicker-overlay{
+  z-index: 1000000000 !important;
+}
+.timepicker-backdrop-overlay{
+  z-index: 1000000000 !important;
+} */
+
+/* Ensure timepicker opens in front of the modal */
+.time{
+  z-index: 10001 !important; /* Ensure this z-index is higher than the modal container */
+}
+
