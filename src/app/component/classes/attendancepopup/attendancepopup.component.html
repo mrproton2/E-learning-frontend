@@ -4,75 +4,50 @@
 
     <mat-form-field>
       <mat-label>Date of creation</mat-label>
-      <input matInput formControlName="date" id="date"(dateInput)="onDateChange($event)" [matDatepicker]="picker">
+      <input matInput formControlName="date" id="date" (dateInput)="onDateChange($event)" [matDatepicker]="picker">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-     </mat-form-field>
-     <mat-form-field>
-      <mat-label>Subject Name</mat-label>
-      <mat-select formControlName="subject" (selectionChange)="onSelect($event.value)">
-        <mat-option *ngFor="let scheduleddata of scheduleddata" [value]="scheduleddata.subjectname">{{ scheduleddata.subjects }}</mat-option>
-      </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Alloted Faculty</mat-label>
-      <mat-select formControlName="allotfaculty">
-        <mat-option *ngFor="let filterscheduleddata of filterscheduleddata" [value]="filterscheduleddata.facultyname">{{ filterscheduleddata.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-<!-- 
-   <mat-form-field>
-      <mat-label></mat-label>
-      <input matInput formControlName="allotfaculty" [value]="filterscheduleddata.facultyname" placeholder= {{filterscheduleddata.name}}>
-    </mat-form-field> -->
-
-    <mat-form-field>
-      <mat-label>Timing</mat-label>
-      <mat-select formControlName="timing">
-        <mat-option *ngFor="let filterscheduleddata of filterscheduleddata" [value]="filterscheduleddata.Timing">{{ filterscheduleddata.Timing }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    <!-- <mat-form-field>
-      <mat-label>Timing</mat-label>
-      <input matInput formControlName="timing"  >
-    </mat-form-field> -->
   </div>
 
-  <h2>Schedulet</h2>
-  <mat-checkbox id="amateur"  color="primary" ></mat-checkbox>
+  <h2>Schedule</h2>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="srno">
       <th mat-header-cell *matHeaderCellDef>SR NO </th>
       <td mat-cell *matCellDef="let element"> {{element.srno}} </td>
     </ng-container>
-  
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Subject Name </th>
       <td mat-cell *matCellDef="let element"> {{element.subjects}} </td>
     </ng-container>
-  
-    <ng-container matColumnDef="lecture">
-      <th mat-header-cell *matHeaderCellDef> Lecture </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      <td><mat-checkbox id="amateur"  color="primary" ></mat-checkbox></td>
-    </ng-container>
 
+    <ng-container matColumnDef="lecture">
+      <th mat-header-cell *matHeaderCellDef> Faculty Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td><mat-checkbox id="amateur" color="primary"></mat-checkbox></td>
+    </ng-container>
     <ng-container matColumnDef="test">
-      <th mat-header-cell *matHeaderCellDef> test </th>
+      <th mat-header-cell *matHeaderCellDef>Timing </th>
       <td mat-cell *matCellDef="let element"> {{element.Timing}} </td>
     </ng-container>
-  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let element">
+         <button mat-raised-button (click)="view(element)" color="primary">View</button> 
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  
-  
-  
+
+
+
   <button type="submit" mat-raised-button color="primary">Submit</button>
-  
+
 </form>

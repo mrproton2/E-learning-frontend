@@ -234,7 +234,7 @@ Post(data: any, url: any) {
   return this.http.post(url, data);
 }
 Get(url: any): Observable<any[]> {
-  debugger
+
   url = this.baseurl + url;
   return this.http.get<any>(url);
 }
