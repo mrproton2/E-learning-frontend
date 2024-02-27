@@ -116,7 +116,7 @@ export class AddtestpopupComponent {
   addschedule() {
     debugger
     if (this.testForm.valid) {
-      this.service.addInquiry(this.testForm.value, "Schedule/Addschedule").subscribe(result => {
+      this.service.addInquiry(this.testForm.value, "AddTest/AddTest").subscribe(result => {
         this.toastr.success('Successfully !')
       })
     } else {

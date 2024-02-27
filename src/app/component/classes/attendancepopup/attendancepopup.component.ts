@@ -54,7 +54,7 @@ export class AttendancepopupComponent implements OnInit {
 
     this.attedancetabledata = this.data.batch_pk;
     console.log(this.attedancetabledata)
-    // this.getstudentrecord();
+   
     this.getscheduledata();
   }
 
@@ -65,13 +65,6 @@ export class AttendancepopupComponent implements OnInit {
     if (this.attendanceForm.value) {
     }
   }
-
-  // getstudentrecord() {
-  //   this.service.getstudenddata("Attendance/getstudenddata").subscribe(studentdata => {
-  //     this.studentdata = studentdata;
-  //     this.dataSource = this.studentdata.filter((item) => item.batchName == this.attedancetabledata);
-  //   });
-  // }
 
   getscheduledata() {
     this.service.Get("Schedule/getschedule").subscribe(scheduledatas => {
@@ -101,7 +94,7 @@ export class AttendancepopupComponent implements OnInit {
   Openpopup(data: any, title: any, component: any) {
     debugger
     var _popup = this.dialog.open(component, {
-      width: '100%',
+      width: '80%',
       height: '80%',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '1000ms',
@@ -125,8 +118,7 @@ export class AttendancepopupComponent implements OnInit {
   }
   view(data: any) {
     this.Openpopup(data, 'Add Stream', AttendancesubjectpopComponent);
-    console.log(data)
-  }
+     }
 
 }
 

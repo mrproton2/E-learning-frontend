@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/service/master.service';
 
 @Component({
@@ -16,87 +17,90 @@ export class AttendancesubjectpopComponent implements OnInit {
   checkboxForm: FormGroup;
   datas: any[];
   parentSelector: boolean = false;
+
+
+  tableData: any[] = [];
+  form: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private service: MasterService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService,
   ) {
-    this.checkboxForm = this.formBuilder.group({});
-    this.data = [];
+  
   }
 
 
   ngOnInit() {
-
+    this.form = this.formBuilder.group({
+      batchname: [this.data.batchname],
+      dateoflecture: [this.data.dateoflecture],
+      facultyname: [this.data.facultyname],
+      schedule_id: [this.data.schedule_id],
+      subjectname: [this.data.subjectname],
+      Timing: [this.data.Timing],
+      tableData: this.formBuilder.array([])
+    });
 
     // this.dataSource.forEach(item => {
     //   this.checkboxForm.addControl(item.id.toString(), new FormControl(item.checked));
     // });
 
-    this.getscheduledata()
+
     this.attedancetabledata = this.data;
     console.log(this.attedancetabledata)
     this.getstudentrecord()
   }
 
 
-  getscheduledata() {
-    debugger
-    this.service.Get("Schedule/getschedule").subscribe(scheduledatas => {
-      let data = scheduledatas
-
-      this.scheduledata = data.filter((item) => item.batchname == this.data.batchname);
-      console.log(this.scheduledata)
-      // this.dataSource = this.studentdata.filter((item) => item.batchName == this.attedancetabledata);  
-    });
-  }
 
   getstudentrecord() {
     this.service.getstudenddata("Attendance/getstudenddata").subscribe(studentdata => {
       debugger
       this.studentdata = studentdata;
       this.dataSource = this.studentdata.filter((item) => item.batchName == this.data.batchname);
+      this.tableData=this.dataSource
       console.log(this.dataSource)
+      this.initFormArray();
     });
   }
 
   onSubmit() {
-    const formData = this.data.map(item => {
-      return { id: item.id, name: item.name, checked: this.checkboxForm.get(item.id.toString())!.value };
-    });
-    this.service.Post(formData, 'Attendance/getstudenddata').subscribe(response => {
-      console.log('Data sent successfully:', response);
-    });
+
   }
 
 
 
-
-
-  food = [
-    { id: 1, select: false, name: 'dumpling' },
-    { id: 2, select: true, name: 'burger' },
-    { id: 3, select: true, name: 'sandwich' },
-  ];
-
-  onChangeFood($event) {
-    const id = $event.target.value;
-    const isChecked = $event.target.checked;
-
-    this.food = this.food.map((d) => {
-      if (d.id == id) {
-        d.select = isChecked;
-        this.parentSelector = false;
-        return d;
-      }
-      if (id == -1) {
-        d.select = this.parentSelector;
-        return d;
-      }
-      return d;
+  initFormArray() {
+    debugger
+    const formArray = this.form.get('tableData') as FormArray;
+    this.tableData.forEach(item => {
+      formArray.push(this.formBuilder.group({
+        user_id: [item.user_id],
+        studentname: [item.studentname],
+        presentflag: [0]
+      }));
     });
-    console.log(this.food);
+  }
+
+  submitData() {
+    debugger
+    const formData = this.form.value;
+    if (this.form.value) {
+      this.service.Post(this.form.value, "Attendance/attendancedata").subscribe(result => {
+        this.toastr.success('Successfully !')
+      })
+    } else {
+      this.toastr.warning('Please Check the Form again')
+    }
+
+    //   .subscribe(response => {
+    //     console.log('Data submitted successfully:', response);
+    //   }, error => {
+    //     console.error('Error submitting data:', error);
+    //   });
   }
 
 }

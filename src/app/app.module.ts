@@ -140,7 +140,8 @@ import { ResetstudnetpasswordComponent } from './component/student/resetstudnetp
 import { DatePipe } from '@angular/common';
 import { StudentscheduleComponent } from './component/student/studentschedule/studentschedule.component';
 import { AttendancesubjectpopComponent } from './component/classes/attendancesubjectpop/attendancesubjectpop.component';
-
+import { ScheduleOldRecordComponent } from './component/classes/schedule-old-record/schedule-old-record.component';
+import { TestattendanceComponent } from './component/classes/testattendance/testattendance.component';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -233,6 +234,8 @@ export const MY_DATE_FORMATS = {
     ResetstudnetpasswordComponent,
     StudentscheduleComponent,
     AttendancesubjectpopComponent,
+    ScheduleOldRecordComponent,
+    TestattendanceComponent
  
   ],
   imports: [

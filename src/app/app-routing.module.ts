@@ -57,6 +57,8 @@ import { StudentprofileComponent } from './component/student/studentprofile/stud
 import { ResetstudnetpasswordComponent } from './component/student/resetstudnetpassword/resetstudnetpassword.component';
 import { StudentscheduleComponent } from './component/student/studentschedule/studentschedule.component';
 import { AttendancesubjectpopComponent } from './component/classes/attendancesubjectpop/attendancesubjectpop.component';
+import { ScheduleOldRecordComponent } from './component/classes/schedule-old-record/schedule-old-record.component';
+import { TestattendanceComponent } from './component/classes/testattendance/testattendance.component';
 
 
 
@@ -143,6 +145,8 @@ const routes: Routes = [
       { path: 'feespayment', component: FeespaymentComponent },
       { path: 'uploadmarks', component: UploadmarksComponent },
       { path: 'attendancesubjectpop', component: AttendancesubjectpopComponent },
+      { path: 'scheduleoldrecord', component: ScheduleOldRecordComponent },
+      { path: 'testattendance', component: TestattendanceComponent },
     ]
   },
 ];

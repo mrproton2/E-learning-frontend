@@ -1,44 +1,72 @@
 
-import { Component,ViewChild } from '@angular/core';
+import { Component,OnInit,ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Customer } from 'src/app/Model/Customer';
 import { MasterService } from 'src/app/service/master.service';
-//  import { PopupComponent } from './popup/popup.component';
-import { PopupComponent } from 'src/app/component/popup/popup.component';
-import { UserdetailComponent } from 'src/app/component/userdetail/userdetail.component';
-import { AddbatchpopupComponent } from '../addbatchpopup/addbatchpopup.component';
+
 import { SchedulepopupComponent } from '../schedulepopup/schedulepopup.component';
 import { AddtestpopupComponent } from '../addtestpopup/addtestpopup.component';
+import { ToastrService } from 'ngx-toastr';
+
+
+export interface scheduletable {
+  schedule_id: string;
+  dateoflecture: string;
+  Timing: string;
+  batch_name: string;
+  subjects: string;
+  name: string;
+  notice: string;
+}
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css']
 })
-export class ScheduleComponent  {
+export class ScheduleComponent  implements OnInit {
   customerlist !: Customer[];
   dataSource: any;
-  displayedColumns: string[] = ["srno", "batchname", "DOC", "status"];
+  displayedColumns: string[] = ["srno","dateoflecture", "Timing", "batch_name", "subjects", "name", "notice","action"];
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
   dataSource1 = new MatTableDataSource<any>(); // Define your data source
   dataSource2 = new MatTableDataSource<any>(); // Define your data source
 
 
-  constructor(private service: MasterService, private dialog: MatDialog) {
-    this.loadcustomer();
+  constructor(
+    private service: MasterService, 
+    private dialog: MatDialog,
+    private toastr:ToastrService
+    ) {
+    
+  }
+  ngOnInit(): void {
+   this.scheduleforclasspanel()
   }
 
-  loadcustomer() {
-    this.service.GetCustomer().subscribe(res => {
-      this.customerlist = res;
-      this.dataSource = new MatTableDataSource<Customer>(this.customerlist);
+  scheduleforclasspanel() {
+    this.service.Get("Schedule/scheduleforclasspanel").subscribe(batchname => {
+      this.dataSource = batchname;
+      this.dataSource = new MatTableDataSource<scheduletable>(this.dataSource);
       this.dataSource.paginator = this.paginatior;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  deleteschedule(element: any) {
+    debugger
+    if (confirm('Are you sure??')) {
+      this.service.Delete(element, "Schedule/").subscribe(data => {
+        this.toastr.success('Deleted Successfully')
+        this.scheduleforclasspanel();
+      })
+    }
+
+
   }
 
   Filterchange(data: Event) {
@@ -46,17 +74,11 @@ export class ScheduleComponent  {
     this.dataSource.filter = value;
   }
 
-  editcustomer(code: any) {
-    this.Openpopup(code, 'Edit Customer',ScheduleComponent);
-  }
-
-  detailcustomer(code: any) {
-    this.Openpopup(code, 'Customer Detail',UserdetailComponent);
-  }
+ 
 
   
 
-  addcustomer(){
+  addschedule(){
     this.Openpopup(0, 'Add batch',SchedulepopupComponent);
   }
   addtest(){
@@ -77,7 +99,7 @@ export class ScheduleComponent  {
     });
     _popup.afterClosed().subscribe(item => {
       // console.log(item)
-      this.loadcustomer();
+     this.scheduleforclasspanel()
     })
   }
 }

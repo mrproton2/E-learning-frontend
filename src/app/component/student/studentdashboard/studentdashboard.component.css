@@ -1,0 +1,15 @@
+.book-card {
+    max-width: 400px;
+    margin: 5px;
+    background-color:whitesmoke;
+    
+  }
+  
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .container >*{
+    flex: 1 1 350px;
+  }

@@ -230,6 +230,7 @@ loginget(url: any): Observable<any[]> {
 
 //Common Servive
 Post(data: any, url: any) {
+  debugger
   url = this.baseurl + url;
   return this.http.post(url, data);
 }
